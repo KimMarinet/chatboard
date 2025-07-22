@@ -18,6 +18,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     /**
      * 요청 메서드를 사용하기 위한 기본 설정
+     *
+     *
      * @return
      */
     @Bean
