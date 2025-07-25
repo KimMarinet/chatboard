@@ -6,6 +6,7 @@
 <main layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
+        <input type="hidden" name="gid" th:field="*{gid}">
         <ul>
             <li>
                 <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
