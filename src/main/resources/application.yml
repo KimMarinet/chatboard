@@ -53,3 +53,9 @@ springdoc:
     doc-expansion: none
   paths-to-match:
     - /api/**
+
+
+python:
+  path:
+    base: ${python.base}
+    chatbot: ${python.chatbot}
