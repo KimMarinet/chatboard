@@ -54,3 +54,54 @@ var commonLib = {
         return url ? baseUrl + url : baseUrl;
     }
 }
+
+
+// 에디터 공통처리 부분
+commonLib.loadEditor = function(el, height = 350) {
+    if (!ClassicEditor || !el) {
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+        (async () => {
+            try {
+                const editor = await ClassicEditor.create(el);
+                resolve(editor);
+
+                editor.editing.view.change((writer) => {
+                    writer.setStyle(
+                        "height", `${height}px`,
+                        editor.editing.view.document.getRoot()
+                    );
+                });
+
+            } catch (err) {
+                console.error(err);
+                reject(err);
+            }
+        })();
+    });
+};
+
+// source -> 이미지 경로
+commonLib.insertEditorImage = function(source, editor) {
+    editor = editor ?? window.editor;
+    if (!editor || !source || (Array.isArray(source) && source.length === 0)) return;
+
+    source = Array.isArray(source) ? source : [source];
+
+    editor.execute('insertImage', { source })
+
+};
+
+// SweetAlert2 처리
+window.alert = function(message, callback) {
+    parent.Swal.fire({
+      title: message,
+      icon: "warning"
+    }).then(() => {
+        if (typeof callback === 'function') {
+            callback();
+        }
+    })
+};

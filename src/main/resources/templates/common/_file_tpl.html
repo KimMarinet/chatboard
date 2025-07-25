@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- 사용할때는 와 같이 사용
+<!-- 사용할때는 아래와 같이 사용
  <script th:replace="~{common/_file_tpl::image_tpl}"></script>
  -->
 <script th:fragment="image_tpl" id="image-tpl" type="text/html">
@@ -9,4 +9,17 @@
         <button type="button" class="remove" data-seq="[seq]">삭제</button>
     </div>
 </script>
+
+<!-- 사용할때는 아래와 같이 사용
+ <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
+ -->
+
+<script th:fragment="editor_tpl" id="editor-tpl" type="text/html">
+    <span class="file-items" id="file-[seq]">
+            <a th:href="@{/file/download/[seq]}">[fileName]</a>
+            <i class="xi-upload insert-editor" data-file-url="[fileUrl]"></i>
+            <i class="xi-close remove" data-seq="[seq]"></i>
+        </span>
+</script>
+
 </html>

@@ -4,10 +4,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.*;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,21 +89,4 @@ public class FileController {
 		} catch (IOException e) {}
 	}
 
-	@GetMapping("/image/{seq}")
-	public ResponseEntity<byte[]> showImage(@PathVariable("seq") Long seq) {
-		FileInfo item = infoService.get(seq);
-
-		String contentType = item.getContentType();
-		byte[] bytes = null;
-		File file = new File(item.getFilePath());
-		try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
-			bytes = bis.readAllBytes();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.valueOf(contentType));
-
-		return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
-	}
 }
