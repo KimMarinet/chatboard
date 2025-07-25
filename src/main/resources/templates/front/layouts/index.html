@@ -9,7 +9,7 @@
     <meta name="keywords" th:content="${@utils.keywords()}">
     <meta name="description" th:content="${@utils.description()}">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css?v={v}(v=${@utils.version()})}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
     <th:block layout:fragment="addCommonCss"></th:block>
@@ -27,6 +27,7 @@
     <script th:src="@{/front/js/common.js?v={v}(v=${@utils.version()})}"></script>
     <script th:each="jsFile : ${addScript}" th:src="@{/front/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
     <th:block layout:fragment="addScript"></th:block>
+
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
     <body>

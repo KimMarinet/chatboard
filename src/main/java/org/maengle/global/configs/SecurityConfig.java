@@ -40,7 +40,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth ->{
             auth.requestMatchers("/mypage/**").authenticated() // 회원일 경우
                     .requestMatchers("/member/join", "/member/login").anonymous() // 비회원일 경우
-                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                    //.requestMatchers("/admin/**").hasAuthority("ADMIN")
                     .anyRequest().permitAll(); // 나머지는 모두 허용
         });
 

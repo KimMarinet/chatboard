@@ -12,6 +12,7 @@ public class MyPageController {
 
     @GetMapping
     public String index() {
+
         return "front/mypage/index";
     }
 }

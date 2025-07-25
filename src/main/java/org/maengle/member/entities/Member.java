@@ -54,6 +54,7 @@ public class Member extends BaseEntity {
     private LocalDateTime expired; // 계정 만료 일자
     private LocalDateTime credentialChangedAt; // PW 변경일
 
+    //test
     @Transient
     private FileInfo profileImage;
 }

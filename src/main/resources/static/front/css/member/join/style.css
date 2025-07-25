@@ -1,0 +1,84 @@
+h1 {
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: #333;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+.join-template{
+    margin: 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.join-container ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.join-form input{
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.gender-option {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px 15px 10px;
+  gap: 8px;
+  font-size: 16px;
+}
+
+input.radio-input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.btn-join{
+    width: 100%;
+    padding: 12px;
+    margin: 0;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-image{
+    margin-bottom: 15px;
+}
+
+.terms {
+    margin-bottom: 15px;
+}
+
+input#terms-agree {
+    width: auto;
+}
