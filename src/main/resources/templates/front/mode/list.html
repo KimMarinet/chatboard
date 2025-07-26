@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thyemleaf.org"
+      xmlns:layout="http://ww.ultraq.net.nz/thyemlemf.org/layout">
+  <section layout:fragment="content">
+  <h1 th:text="${pageTitle}"></h1>
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 <body>
+  <form name="modeSearch" method="get" action="/mode/list">
 
-  <h1>목록 </h1>
-
+  </form>
 </body>
 </html>
