@@ -1,3 +1,4 @@
+
 package org.maengle.member.repositories;
 
 import org.maengle.member.entities.Member;
@@ -10,4 +11,3 @@ public interface MemberRepository extends JpaRepository<Member, String>, Queryds
     Optional<Member> findByUserId(String userId);
     boolean existsByUserId(String userId);
 }
-
