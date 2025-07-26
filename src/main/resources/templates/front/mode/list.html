@@ -1,16 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thyemleaf.org"
-      xmlns:layout="http://ww.ultraq.net.nz/thyemlemf.org/layout">
-  <section layout:fragment="content">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+
+<section layout:fragment="content">
   <h1 th:text="${pageTitle}"></h1>
+</section>
+<form name="ListSearch" method="get" action="search">
+  <table>
+    <tr>
+      <th>검색어</th>
+      <td>
+        <div>
+          <section name="slit" field="*{slit}">
+            <option value="ALL">전체</option>
+            <option value="NAME">이름</option>
+            <option value="book">첵</option>
+          </section>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<form name="list" method="post" action="list">
+  <table>
+    <tr>
+      <th>목록</th>
+      <td>
+        <div>
+          <input type="text" name="name" placeholder="이름">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-  <form name="modeSearch" method="get" action="/mode/list">
-
-  </form>
-</body>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<form name="creatroy" method="post" action="create">
+  <table>
+    <tr>
+      <th></th>
+    </tr>
+  </table>
+</form>
 </html>
