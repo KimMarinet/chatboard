@@ -1,5 +1,6 @@
 package org.maengle.member.controllers;
 
+<<<<<<< HEAD
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.file.constants.FileStatus;
@@ -18,6 +19,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+=======
+import ch.qos.logback.core.model.Model;
+import lombok.RequiredArgsConstructor;
+import org.maengle.global.libs.Utils;
+import org.maengle.member.services.JoinService;
+import org.maengle.member.validation.JoinValidator;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,15 +43,28 @@ import java.util.UUID;
 public class MemberController {
 
     private final Utils utils;
+<<<<<<< HEAD
     private final JoinService joinService;
     private final JoinValidator joinValidator;
     private final FileInfoService fileInfoService;
+=======
+    private  final JoinValidator joinValidator;
+    private  final JoinService service;
+
+
+
+    @ModelAttribute("addCss")
+    public List<String> addCss() {
+        return List.of("member/style");
+    }
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
         return new RequestLogin();
     }
 
+<<<<<<< HEAD
     @ModelAttribute("genders")
     public Gender[] genders() {
         return Gender.values();
@@ -50,10 +80,16 @@ public class MemberController {
         commonProcess("join", model);
         form.setGid(UUID.randomUUID().toString());
 
+=======
+    @GetMapping("/join")
+    public String join (@ModelAttribute RequestJoin form,Model model){
+            service.process(form);
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
         return "front/member/join";
     }
 
     @PostMapping("/join")
+<<<<<<< HEAD
     public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
         commonProcess("join", model);
 
@@ -70,6 +106,17 @@ public class MemberController {
         joinService.process(form);
 
         // 회원가입 성공시
+=======
+    public String joinPs(@ModelAttribute RequestJoin form , Errors errors, Model model) {
+
+        joinValidator.validate(form,errors);
+
+        if (errors.hasErrors()) {
+            return "member/join";
+        }
+        service.process(form);
+
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
         return "redirect:/member/login";
     }
 
@@ -96,12 +143,16 @@ public class MemberController {
         return "front/member/login";
     }
 
+<<<<<<< HEAD
     // 공통 처리 (현재로선 페이지 타이틀을 설정 (message를 일괄 관리))
+=======
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";
         String pageTitle = "";
 
+<<<<<<< HEAD
         List<String> addCommonScript = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
 
@@ -122,3 +173,17 @@ public class MemberController {
         model.addAttribute("addScript", addScript);
     }
 }
+=======
+
+
+
+
+    }
+
+
+
+
+
+
+}
+>>>>>>> 52f51d458682620f7f0bbbd49f4e654e4d9051e1
