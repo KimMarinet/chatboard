@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+</section>
+<main>
+    // 임시로 name 지정을 했어요 이그리고 낼 질문 가능 하간요
+    <form name="create" th:action="create">
+        <table>
+            <tr>
+                <th>사극</th>
+                <th>로멘스</th>
+                <th>느와르</th>
+            </tr>
+        </table>
+    </form>
+</main>
