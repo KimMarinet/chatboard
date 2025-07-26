@@ -18,7 +18,6 @@ public class RequestJoin {
 
     @Size(min=8)
     @NotBlank
-    private String id;
     private String password;
 
     @NotBlank
@@ -32,8 +31,18 @@ public class RequestJoin {
 
     @NotNull
     private Gender gender;
+
+    @Email
+    @NotBlank
     private String email;
-    private String isNumber;
+
+    @NotBlank
     private String mobile;
+
     private boolean termsAgree;
+
+
+    private FileInfo profileImage;
+
+
 }

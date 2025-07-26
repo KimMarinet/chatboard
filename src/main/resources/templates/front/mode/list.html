@@ -6,13 +6,13 @@
 <section layout:fragment="content">
   <h1 th:text="${pageTitle}"></h1>
 </section>
-<form name="ListSearch" method="get" action="search">
+<form name="ListSearch" method="get" th:action="search">
   <table>
     <tr>
       <th>검색어</th>
       <td>
         <div>
-          <section name="slit" field="*{slit}">
+          <section name="slit" th:field="*{slit}">
             <option value="ALL">전체</option>
             <option value="NAME">이름</option>
             <option value="book">첵</option>
@@ -34,21 +34,20 @@
       </td>
     </tr>
   </table>
-</form>
-<form name="creatroy" method="post" action="create">
+</form>"
+<form name="createForm" method="post" th:action="create">
   <table>
-    <h1>모댈 전체 보기</h1>
     <tr>
-      <th>장르 모델</th>
-      <button type="submit" ></button>
+      <th>장르별</th>
+      <td><button type="submit">장르 모댈</button> </td>
     </tr>
     <tr>
-      <th>감정별 모델</th>
-      <button type="submit"></button>
+      <th>감정별</th>
+      <td><button type="submit">감정별</button> </td>
     </tr>
     <tr>
-      <th></th>
-      <button type="submit"></button>
+      <th>베스트 모델</th>
+      <td><button type="submit">베스트 모델</button> </td>
     </tr>
   </table>
 </form>

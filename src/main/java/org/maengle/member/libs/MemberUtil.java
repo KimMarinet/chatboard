@@ -10,12 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Lazy
 @Component
-
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
-
-@Lazy
-@Component
 public class MemberUtil {
     public boolean isLogin() {
         return getMember() != null;
@@ -35,11 +29,4 @@ public class MemberUtil {
 
         return null;
     }
-
-
-
-
-
-
-
 }
