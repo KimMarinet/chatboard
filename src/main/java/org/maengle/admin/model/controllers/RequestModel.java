@@ -1,4 +1,4 @@
-package org.maengle.admin.Model.controllers;
+package org.maengle.admin.model.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

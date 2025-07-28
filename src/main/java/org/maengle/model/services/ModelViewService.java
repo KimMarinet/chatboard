@@ -3,7 +3,7 @@ package org.maengle.model.services;
 import com.querydsl.core.BooleanBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.maengle.admin.Model.controllers.RequestModel;
+import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;

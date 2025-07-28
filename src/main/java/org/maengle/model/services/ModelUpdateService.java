@@ -2,7 +2,7 @@ package org.maengle.model.services;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.maengle.admin.Model.controllers.RequestModel;
+import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.global.exceptions.script.AlertException;
 import org.maengle.global.libs.Utils;
 import org.maengle.model.constants.ModelStatus;

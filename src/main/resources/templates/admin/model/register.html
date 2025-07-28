@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/admin/layouts/index}">
-
-<th:block layout:fragment="addCommonScript">
-    <th:block th:replace="~{common/_editor_script::script}"></th:block>
-</th:block>
-
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          layout:decorate="~{/admin/layouts/index}">
+<head>
+    <th:block layout:fragment="addCommonScript">
+        <th:block th:replace="~{common/_editor_script::script}"></th:block>
+    </th:block>
+</head>
+<body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
-    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${model}" autocomplete="off">
 
-        <th:block th:replace="~{/model/_form::common}"></th:block>
+    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
         <th:block th:replace="~{/model/_form::common}"></th:block>
 
         <table>
@@ -66,11 +66,11 @@
                 <td>
                     <textarea id="description" name="description" th:field="*{description}"></textarea>
                     <div class="uploaded_images" id="editor-images">
-                        <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="'file-' + ${item.seq}">
-                            <a th:href="@{/file/download/{seq}(seq=${item.seq})}" th:text="${item.fileName}"></a>
-                            <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
-                            <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                        </span>
+                            <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="'file-' + ${item.seq}">
+                                <a th:href="@{/file/download/{seq}(seq=${item.seq})}" th:text="${item.fileName}"></a>
+                                <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
+                                <i class="xi-close remove" th:data-seq="${item.seq}"></i>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -79,8 +79,9 @@
         <div class="button-group">
             <button type="submit" class="btn btn-primary">저장</button>
         </div>
-
     </form>
 </section>
+</section>
+</body>
 
-</html>
+    </html>
