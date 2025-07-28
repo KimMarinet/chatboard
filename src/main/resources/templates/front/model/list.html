@@ -8,7 +8,7 @@
 <body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
-<form name="ListSearch" method="get" th:action="@{/model}" th:object="${search}">
+<form name="ListSearch" method="get" th:action="@{/model/list}" th:object="${search}">
     <table>
         <tr>
             <th>검색어</th>

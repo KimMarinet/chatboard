@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
 import org.maengle.board.entities.Board;
 import org.maengle.board.services.configs.BoardConfigInfoService;
-import org.maengle.board.services.BoardConfigUpdateService;
+import org.maengle.board.services.configs.BoardConfigUpdateService;
 import org.maengle.board.validator.BoardConfigValidator;
 import org.maengle.global.search.CommonSearch;
 import org.maengle.global.search.ListData;
