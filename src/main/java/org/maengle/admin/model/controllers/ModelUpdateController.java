@@ -1,4 +1,4 @@
-package org.maengle.admin.model.controllers;
+package org.maengle.admin.Model.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
@@ -40,7 +40,7 @@ public class ModelUpdateController extends CommonController {
 
 	@ModelAttribute("addCss")
 	public List<String> addCss() {
-		return List.of("product/style");
+		return List.of("model/style");
 	}
 
 	@ModelAttribute("statusList")
@@ -50,14 +50,14 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
 	@GetMapping({"", "/list"})
-	public String list(@ModelAttribute ModelSearch search, Model model) {
+	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
 
 		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
-		return "admin/product/list";
+		return "admin/model/list";
 	}
 
 	// 목록에서 상품 정보 수정과 삭제
@@ -85,7 +85,7 @@ public class ModelUpdateController extends CommonController {
 		commonProcess("update", model);
 
 		RequestModel form = modelInfoService.getForm(seq);
-		model.addAttribute("requestProduct", form);
+		model.addAttribute("requestModel", form);
 
 		return "admin/model/update";
 	}
