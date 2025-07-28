@@ -22,4 +22,6 @@ public class RequestBoard {
 
     @NotBlank
     private String content;
+
+
 }
