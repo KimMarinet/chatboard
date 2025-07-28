@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{front/layouts/mypage}">
+      layout:decorate="~{admin/layouts/index}">
+
 <head>
-    <title>모델 목록</title>
+    <title th:text="${pageTitle}">모델 목록</title>
 </head>
+
 <body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
-    <form name="ListSearch" method="get" th:action="@{/admin/model}" th:object="${search}">
-        <table>
+
+    <form name="frmSearch" method="GET" th:action="@{/admin/model}" autocomplete="off" th:object="${search}">
+        <table class="table-cols">
             <tr>
-                <th>검색어</th>
+                <th width="150">키워드 검색</th>
                 <td>
-                    <div>
-                        <select th:field="*{searchType}">
-                            <option value="ALL">전체</option>
-                            <option value="GENRE">장르별</option>
-                            <option value="COUNT">조회수별</option>
-                        </select>
+                    <div class="flex">
+                        <select  th:field="*{searchType}" class="w180 mr5">
+                            <option value="ALL">통합검색</option>
+                            <option value="NAME">이름</option>
+                            <option value="COUNT">조회수</option>
+                        </select><x></x>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드를 입력">
                     </div>
                 </td>
             </tr>
         </table>
-        <button type="submit">검색</button>
+        <button type="submit" class="submit-btn">검색하기</button>
     </form>
-    <table>
-        <thead>
-        <tr>
-            <th>이름</th>
-            <th>카테고리</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${items}">
-            <td th:text="${item.name}">모델 이름</td>
-            <td th:text="${item.category}">카테고리</td>
-        </tr>
-        </tbody>
-    </table>
-    <form name="createForm" method="post" th:action="@{/model/create}">
-        <table>
+
+    <h2>모델 목록</h2>
+    <form name="modeList" method="POST" th:action="@{/admin/list}" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="_method" value="PATCH">
+        <table class="table-rows">
+            <thead>
             <tr>
-                <th>장르별</th>
-                <td><button type="submit">장르별 모델</button> </td>
+                <th width="40">
+                    <input type="checkbox" class="check-all" data-target-name="chk" id="check-all">
+                    <label for="check-all" class="standalone"></label>
+                </th>
+                <th width="180">카테고리</th>
+                <th>모델 전체 보기</th>
+                <th width="350"></th>
             </tr>
-            <tr>
-                <th>감정별</th>
-                <td><button type="submit">감정별 모델</button> </td>
+            </thead>
+            <tbody>
+            <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
+                <td align="center">
+                    <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
+                    <label th:for="${'chk-' + status.index}" class="standalone"></label>
+                    <input type="hidden" th:name="${'mid_' + status.index}" th:value="*{mid}">
+                </td>
+                <td th:text="*{mid}" align="center"></td>
+                <td>
+                    <input type="text" th:name="${'name_' + status.index}" th:value="*{name}">
+                </td>
+                <td>
+                    <a th:href="@{/admin/board/update/{mid}(mid=*{mid})}" class="sbtn">리스트 수정</a>
+                    <a th:href="@{/board/list/{mid}(mid=*{mid})}" class="sbtn black" target="_blank">미리보기</a>
+                </td>
             </tr>
-            <tr>
-                <th>베스트 모델</th>
-                <td><button type="submit">베스트 모델</button> </td>
-            </tr>
+            </tbody>
         </table>
     </form>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </body>
 </html>
