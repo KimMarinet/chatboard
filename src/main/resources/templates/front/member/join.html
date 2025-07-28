@@ -45,12 +45,16 @@
                     <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
                 </li>
                 <li>
-                    <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
-                        <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
-                        <div class="inner">
-                            <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
-                                <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
-                                <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                    <!-- 프로필 이미지를 modal로 처리한 부분 -->
+                    <button type="button" class="modal-open" data-target-id="modal-profile">프로필 이미지 첨부</button>
+                    <div class="modal-content" id="modal-profile" data-title="프로필 이미지" data-width="350" data-height="350">
+                        <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                            <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
+                            <div class="inner">
+                                <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                                    <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
+                                    <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                                </div>
                             </div>
                         </div>
                     </div>

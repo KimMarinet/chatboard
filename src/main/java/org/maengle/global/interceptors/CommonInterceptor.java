@@ -27,6 +27,10 @@ public class CommonInterceptor implements HandlerInterceptor {
             modelAndView.addObject("isLogin", memberUtil.isLogin());
             modelAndView.addObject("isAdmin", memberUtil.isAdmin());
             modelAndView.addObject("loggedMember", memberUtil.getMember());
+            // 로그인 했을때 이미지를 modelAndView에 담기
+            if (memberUtil.isLogin()) {
+                modelAndView.addObject("profile", memberUtil.getMember().getProfileImage());
+            }
         }
     }
 }

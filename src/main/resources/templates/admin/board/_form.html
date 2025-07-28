@@ -97,6 +97,21 @@
         </tr>
     </table>
 
+    <h2>스킨설정</h2>
+
+    <table class="table-cols mb30">
+        <tr>
+            <th width="150">스킨 선택</th>
+            <td>
+                <input type="radio" name="skin" value="default" id="skin-default" th:field="*{skin}">
+                <label for="skin-default">기본 스킨</label>
+
+                <input type="radio" name="skin" value="gallery" id="skin-gallery" th:field="*{skin}">
+                <label for="skin-gallery">갤러리 스킨</label>
+            </td>
+        </tr>
+    </table>
+
     <h2>권한설정</h2>
     <table class="table-cols mb30">
         <tr>

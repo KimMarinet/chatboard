@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    margin: 0;
+    color: #000;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+/* 헤더 영역 S */
+.site-logo {
+    height: 50px;
+}
+
+/* 헤더 영역 E */
+
+/* 푸터 영역 S */
+footer .logo {
+    height: 50px;
+}
+/* 푸터 영역 E */

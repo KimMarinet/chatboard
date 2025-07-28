@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Lazy
 @Service
 @RequiredArgsConstructor
-public class BoardConfigUpdateService {
+public class BoardUpdateService {
     private final BoardConfigInfoService configInfoService;
     private final BoardDataRepository boardDataRepository;
     private final FileUploadService uploadService;

@@ -5,9 +5,11 @@ import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.entities.Member;
 
+import java.io.Serializable;
+
 @Data
 @Entity
-public class BoardData extends BaseEntity {
+public class BoardData extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue

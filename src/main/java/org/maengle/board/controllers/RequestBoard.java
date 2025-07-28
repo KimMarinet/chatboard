@@ -2,6 +2,9 @@ package org.maengle.board.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.maengle.file.entities.FileInfo;
+
+import java.util.List;
 
 @Data
 public class RequestBoard {
@@ -14,6 +17,8 @@ public class RequestBoard {
     @NotBlank
     private String gid;
 
+    private String category;
+
     @NotBlank
     private String poster;
 
@@ -22,6 +27,8 @@ public class RequestBoard {
 
     @NotBlank
     private String content;
+    private boolean notice;
 
-
+    private List<FileInfo> editorImages;
+    private List<FileInfo> attachFiles;
 }

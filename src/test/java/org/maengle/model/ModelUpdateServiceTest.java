@@ -4,15 +4,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.global.libs.Utils;
+import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.entities.Model;
 import org.maengle.model.repositories.ModelRepository;
 import org.maengle.model.services.ModelUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+
 @Transactional
+@SpringBootTest
 public class ModelUpdateServiceTest {
 
     @Autowired
@@ -77,5 +85,63 @@ public class ModelUpdateServiceTest {
         assert updated.getName().equals("수정된이름"); // 이름이 수정 된 값과 일치하는지 확인
     }
 
-    /* DELETE + 상태 처리 미완료 */
+    @Test
+    void test3() {
+        Model model = new Model();
+        model.setMid("test_del");
+        model.setName("삭제테스트");
+        modelRepository.saveAndFlush(model);
+
+        Long seq = model.getSeq();
+
+        // DELETE 요청을 시뮬레이션 하기 위한 MockHttpServletRequest 생성
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setMethod("DELETE");
+
+        // 내부적으로 request 객체에 접근하는 서비스/유틸에 request 주입
+        ReflectionTestUtils.setField(modelUpdateService, "request", request);
+        ReflectionTestUtils.setField(utils, "request", request);
+
+        // 삭제할 모델의 seq를 파라미터로 설정 (index 0 기준)
+        request.setParameter("seq_0", String.valueOf(seq));
+
+        modelUpdateService.processList(List.of(0));
+
+        Model found = modelRepository.findById(seq).orElseThrow();
+
+        // 삭제 시간 (deletedAt)이 null이 아닌지 확인
+        assertThat(found.getDeletedAt()).isNotNull();
+
+        System.out.println("변경 후 상태: " + found.getModelStatus());
+    }
+
+    @Test
+    void test4() {
+        Model model = new Model();
+        model.setMid("test_active");
+        model.setName("상태 변경 테스트");
+        modelRepository.saveAndFlush(model);
+
+        Long seq = model.getSeq();
+
+        // POST 요청을 시뮬레이션 하기 위한 MockHttpServletRequest 생성
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setMethod("POST");
+
+        // 모델 seq 및 변경할 상태값 전달
+        request.setParameter("seq_0", String.valueOf(seq));
+        request.setParameter("status_0", "ACTIVE");
+
+        // 내부적으로 request 객체에 접근하는 서비스/유틸에 request 주입
+        ReflectionTestUtils.setField(modelUpdateService, "request", request);
+        ReflectionTestUtils.setField(utils, "request", request);
+
+        modelUpdateService.processList(List.of(0));
+
+        Model found = modelRepository.findById(seq).orElseThrow();
+
+        assertThat(found.getModelStatus()).isEqualTo(ModelStatus.ACTIVE);
+
+        System.out.println("변경된 상태 = " + found.getModelStatus());
+    }
 }

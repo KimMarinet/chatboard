@@ -1,0 +1,22 @@
+main {
+    display: flex;
+}
+
+main > aside {
+    width: 210px;
+    margin-right: 25px;
+    background: #ccc;
+}
+
+main > section {
+    flex-grow: 1;
+}
+
+main > aside .menu {
+    display: block;
+    padding: 15px 20px;
+}
+
+main > aside .menu.on {
+    background: 000;
+}

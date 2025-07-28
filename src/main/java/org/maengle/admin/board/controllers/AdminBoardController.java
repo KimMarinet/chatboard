@@ -49,6 +49,7 @@ public class AdminBoardController extends CommonController {
         commonProcess("register", model);
 
         // 기본값 설정
+        form.setSkin("default");
         form.setListAuthority(Authority.MEMBER);
         form.setViewAuthority(Authority.MEMBER);
         form.setWriteAuthority(Authority.MEMBER);

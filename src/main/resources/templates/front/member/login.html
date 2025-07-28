@@ -7,6 +7,7 @@
     <h1 th:text="${pageTitle}"></h1>
     <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}">
         <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
+        <input type="hidden" name="popup" th:field="*{popup}">
         <ul>
             <li>
                 <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
@@ -18,8 +19,9 @@
             </li>
         </ul>
         <div>
-            <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link"></a>
-            <a th:href="@{/member/findid}" th:text="#{아이디_비밀번호_찾기}" class="btn-link"></a>
+            <!-- target을 통해 페이지 이동 처리 -->
+            <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link" target="_top"></a>
+            <a th:href="@{/member/findid}" th:text="#{아이디_비밀번호_찾기}" class="btn-link" target="_top"></a>
         </div>
         <div>
             <button type="submit" th:text="#{로그인}"></button>

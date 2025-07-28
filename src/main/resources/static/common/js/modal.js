@@ -22,20 +22,103 @@ commonLib.modal = {
 
     },
     /**
+    * 팝업 열기
+    *
+    */
+    open(targetId, url, _width, _height, _title) {
+        let modalContent = null;
+        if (url) { // iframe을 추가한 modalContent 요소로 생성
+            const el = document.querySelector(".modal-content.iframe");
+            if (el) el.parentElement.removeChild(el);
+
+            modalContent = document.createElement("div");
+            modalContent.className = "modal-content iframe";
+            document.body.append(modalContent);
+
+            url = commonLib.getUrl(url + '?popup=true');
+            iframe = document.createElement("iframe");
+            iframe.src = url;
+            iframe.frameBorder = 0;
+            iframe.width = _width - 40;
+            iframe.height = _height - 80;
+            iframe.scrolling = 'auto';
+
+            modalContent.append(iframe);
+
+        } else if(targetId) {
+            modalContent = document.getElementById(targetId);
+             // 모달 내용 영역의 너비 높이, 제목 처리
+             let { width, height, title } = modalContent.dataset;
+             _width = width;
+             _height = height
+             _title = title;
+        }
+
+        if (!modalContent) return;
+
+        const modalBg = document.getElementById("modal-bg");
+
+        modalBg.classList.remove("dn");
+        modalContent.classList.remove("on");
+        modalContent.classList.add("on");
+
+
+        _width = !_width || _width < 1 ? 350 : _width;
+        _height = !_height || _height < 1 ? 350 : _height;
+
+        modalContent.style.width = `${_width}px`;
+        modalContent.style.height = `${_height}px`;
+
+        const xpos = Math.round((innerWidth - _width) / 2);
+        const ypos = Math.round((innerHeight - _height) / 2);
+
+        modalContent.style.top = `${ypos}px`;
+        modalContent.style.left = `${xpos}px`;
+
+        // 팝업 제목 처리
+        if (_title) {
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "modal-title";
+            titleDiv.innerHTML = _title;
+            modalContent.prepend(titleDiv);
+        }
+    },
+    /**
     * close 정의
     * 모달 배경 레이어 - #modal-bg
     * 모달 컨텐츠 레이어 - .modal-content
     */
     close() {
-        const layers = document.querySelectorAll("#modal-bg, .modal-content");
-        layers.forEach(el => {
-            el.classList.remove("dn");
-            el.classList.add("dn");
-        })
+        const modalBg = document.getElementById("modal-bg");
+        modalBg.classList.remove("dn");
+        modalBg.classList.add("dn");
+
+        const iframeContentEl = document.querySelector(".modal-content.iframe");
+        if (iframeContentEl) iframeContentEl.parentElement.removeChild(iframeContentEl);
+
+        const contentEls = document.querySelectorAll(".modal-content.on")
+        contentEls.forEach(el => {
+            el.classList.remove("on");
+            el.style = "";
+
+            const titleEl = el.querySelector(".modal-title");
+            if (titleEl) {
+                el.removeChild(titleEl);
+            }
+        });
+
     }
 };
 
 window.addEventListener("DOMContentLoaded", function() {
     const { modal } = commonLib;
     modal.init();
+
+    const modalOpenEls = document.getElementsByClassName("modal-open");
+    for (const el of modalOpenEls) {
+        el.addEventListener("click", function() {
+            const { targetId, url, width, height, title } = this.dataset;
+            modal.open(targetId, url, width, height, title);
+        });
+    }
 });

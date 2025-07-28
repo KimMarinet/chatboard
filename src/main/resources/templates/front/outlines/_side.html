@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<aside th:fragment="mypage">
+    <div class="profile-image">
+        <th:block th:if="${profile != null}" th:utext="${@utils.printThumb(profile.seq, 180, 180, 'image')}"></th:block>
+    </div>
+
+    <a th:href="@{/mypage/profile}" th:text="#{회원정보_수정}" class="menu" th:classappend="${mainCode == 'profile'} ? 'on'"></a>
+    <a th:href="@{/mypage/board}" th:text="#{내가_작성한_글}" class="menu" th:classappend="${maincode == 'board'} ? 'on'"></a>
+    <a th:href="@{/mypage/resign}" th:text="#{회원탈퇴}" class="menu" th:classappend="${mainCode == 'resign'} ? 'on'"></a>
+
+</aside>
+</html>

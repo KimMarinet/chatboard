@@ -14,13 +14,18 @@
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
     <th:block layout:fragment="addCommonCss"></th:block>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@utils.version()})}">
+    <!-- popup 처리용 -->
+    <link th:if="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@utils.version()})}">
+
+    <link th:unless="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/common/css/popup.css?v={v}(v=${@utils.version()})}">
+
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCss}"
           th:href="@{/front/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
     <th:block layout:fragment="addCss"></th:block>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
+    <script th:src="@{/common/js/modal.js?v={v}(v=${@utils.version()})}"></script>
     <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
     <th:block layout:fragment="addCommonScript"></th:block>
 
@@ -30,10 +35,17 @@
 
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
-    <body>
-        <header th:replace="~{front/outlines/_header::common}"></header>
-        <main layout:fragment="content"></main>
-        <footer th:replace="~{front/outlines/_footer::common}"></footer>
-        <iframe name="ifrmProcess" class="dn"></iframe>
-    </body>
+<body>
+<!-- popup 처리용 -->
+<th:block th:if="${param.popup == null || !param.popup}">
+    <header th:replace="~{front/outlines/_header::common}"></header>
+</th:block>
+
+<main layout:fragment="content"></main>
+
+<th:block th:if="${param.popup == null || !param.popup}">
+    <footer th:replace="~{front/outlines/_footer::common}"></footer>
+</th:block>
+<iframe name="ifrmProcess" class="dn"></iframe>
+</body>
 </html>

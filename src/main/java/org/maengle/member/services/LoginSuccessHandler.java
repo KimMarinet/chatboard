@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -21,10 +22,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         form = Objects.requireNonNullElseGet(form, RequestLogin::new);
 
         // 로그인 성공 시 이동한 페이지 설정
+        if (form.isPopup()) {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>parent.location.reload();</script>");
+            return;
+        }
         String redirectUrl = form.getRedirectUrl();
         String url = StringUtils.hasText(redirectUrl) ? redirectUrl : "/";
 
         session.removeAttribute("requestLogin");
         response.sendRedirect(request.getContextPath() + url);
+
+
     }
 }

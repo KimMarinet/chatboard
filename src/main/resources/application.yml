@@ -4,6 +4,13 @@ server:
     session.cookie.name: 66e56riA66e56riA
 
 spring:
+
+  # 레디스 연동
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${db.url}

@@ -11,28 +11,31 @@ public class RequestBoard {
     private String mode;
 
     @NotBlank
-    private String bid;
+    private String bid; // 게시판 아이디
 
     @NotBlank
-    private String name;
+    private String name; // 게시판 이름
 
-    private int rowsForPage;
+    private int rowsForPage; // 한페이지당 레코드 갯수
 
-    private int pageCount;
+    private int pageCount; // 노출될 페이지 갯수
 
-    private String category;
+    private String skin; // 게시판 스킨
 
-    private boolean active;
-    private boolean editor;
-    private boolean imageUpload;
-    private boolean attachFile;
-    private boolean comment;
+    private String category; // 게시판 분류
 
-    private Authority listAuthority;
+    private boolean active; // 게시판 사용 여부, true - 사용, false : 미사용
+    private boolean editor;  // 에디터 사용 여부
+    private boolean imageUpload; // 에디터에 이미지 추가 기능 사용 여부
+    private boolean attachFile; // 파일 첨부 기능 사용 여부
+    private boolean comment; // 댓글 사용 여부
+    private boolean afterWritingRedirect; // 글 작성 후 이동 방향 false : 게시글 목록, true : 게시글 상세
 
-    private Authority viewAuthority;
+    private Authority listAuthority; // MEMBER - 회원, ADMIN - 관리자
 
-    private Authority writeAuthority;
+    private Authority viewAuthority; // 글보기 권한
 
-    private Authority commentAuthority;
+    private Authority writeAuthority; // 글작성 권한
+
+    private Authority commentAuthority; // 댓글 작성 권한
 }
