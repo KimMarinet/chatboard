@@ -1,4 +1,4 @@
-package org.maengle.admin.board.validators;
+package org.maengle.board.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.board.controllers.RequestBoard;
