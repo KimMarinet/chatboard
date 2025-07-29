@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-<<<<<<< HEAD
       layout:decorate="~{front/layouts/index}">
-=======
-      layout:decorate="~{front/layouts/mypage}">
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
 <head>
     <title>모델 목록</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <section layout:fragment="content">
-<<<<<<< HEAD
     <h1 th:text="${pageTitle}">모델 목록</h1>
 
     <!-- 검색 폼 -->
@@ -22,16 +17,6 @@
                 <th>검색 조건</th>
                 <td>
                     <select  id="searchType" th:field="*{searchType}">
-=======
-    <h1 th:text="${pageTitle}"></h1>
-<form name="ListSearch" method="get" th:action="@{/model/list}" th:object="${search}">
-    <table>
-        <tr>
-            <th>검색어</th>
-            <td>
-                <div>
-                    <select th:field="*{searchType}">
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
                         <option value="ALL">전체</option>
                         <option value="GENRE">장르별</option>
                         <option value="COUNT">조회수별</option>
@@ -46,20 +31,17 @@
     </form>
 
     <!--모델 목록 -->
+    <!--대표 이미지 링크  -->
     <table>
         <thead>
-        <tr>
-            <th>이름</th>
-            <input type="text">
-            <th>카테고리</th>
-        </tr>
+            <tr>
+                <td>이미지</td>
+                <td>
+                    <button type="button">이미지</button>
+                    <img src="@{file/}">
+                </td>
+            </tr>
         </thead>
-        <tbody>
-        <tr th:each="item : ${items}">
-            <td th:text="${item.name}">모델 이름</td>
-            <td th:text="${item.category}">카테고리</td>
-        </tr>
-        </tbody>
     </table>
 
     <!-- 장르 및 감정 선택 폼 -->

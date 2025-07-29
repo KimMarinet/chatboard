@@ -93,11 +93,11 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록, 수정 처리
 	@PostMapping("/register")
-<<<<<<< HEAD
-	public String saveModel(RequestModel form, Errors errors, Model model) {
-=======
+
+
+
 	public String saveModel( RequestModel form, Errors errors, Model model) {
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
 		String mode = Objects.requireNonNullElse(form.getMode(), "add");
 		commonProcess(mode.equals("edit") ? "register" : "update", model);
 
@@ -125,7 +125,7 @@ public class ModelUpdateController extends CommonController {
 	}
 
 	// 공통 처립 부분
-	@PostMapping("/register")
+
 	private void commonProcess(String code, Model model) {
 		code = StringUtils.hasText(code) ? code : "list";
 		String pageTitle = "";

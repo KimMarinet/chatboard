@@ -21,7 +21,7 @@ public class Menus {
                 new Menu("posts", "게시글 관리", "/admin/board/posts")
         ));
 
-<<<<<<< HEAD
+
         // 모델 관리
         menus.put("model" , List.of(
                 new Menu("list", "모델 목록", "/admin/model/list"),
@@ -29,7 +29,6 @@ public class Menus {
                 new Menu("update", "모델 수정", "/admin/model/update")
         ));
 
-=======
 
 
 
@@ -42,7 +41,6 @@ public class Menus {
 
 
 
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
     }
 
     // 주 메뉴 코드(member)로 (서브)메뉴목록 조회
