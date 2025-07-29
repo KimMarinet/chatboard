@@ -66,8 +66,13 @@ python:
     base: ${python.base}
     chatbot: ${python.chatbot}
 
+<<<<<<< HEAD
 # 소셜 로그인 API 설정
 social:
   kakao.apikey: ${kakao.apikey}
   naver.apikey: ${naver.apikey}
   naver.secret: ${naver.secret}
+=======
+
+
+>>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd

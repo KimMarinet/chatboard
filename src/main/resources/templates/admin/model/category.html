@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+</section>
+
+
+<form th:action="category" name="name" th:field="*{name}">
+    <table>
+
+    </table>
+
+</form>
+</html>

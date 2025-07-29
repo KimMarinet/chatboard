@@ -7,6 +7,7 @@ import org.maengle.member.constants.Authority;
 @Data
 public class RequestBoard {
 
+    private Long seq;
     private String mode;
 
     @NotBlank

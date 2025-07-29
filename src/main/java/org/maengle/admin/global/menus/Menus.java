@@ -21,6 +21,7 @@ public class Menus {
                 new Menu("posts", "게시글 관리", "/admin/board/posts")
         ));
 
+<<<<<<< HEAD
         // 모델 관리
         menus.put("model" , List.of(
                 new Menu("list", "모델 목록", "/admin/model/list"),
@@ -28,10 +29,27 @@ public class Menus {
                 new Menu("update", "모델 수정", "/admin/model/update")
         ));
 
+=======
+
+
+
+        // 모델 관리
+        menus.put("model" , List.of(
+                new Menu("list", "모델 목록", "/admin/model/list"),
+                new Menu("register" , "모댈 등록" , "admin/model/register"),
+                new Menu("category", "카테고리", "admin/model/category")
+        ));
+
+
+
+>>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
     }
 
     // 주 메뉴 코드(member)로 (서브)메뉴목록 조회
     public static List<Menu> getMenus(String mainCode) {
         return menus.getOrDefault(mainCode, List.of());
     }
+
+
+
 }

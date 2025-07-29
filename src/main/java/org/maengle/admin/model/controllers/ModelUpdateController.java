@@ -8,8 +8,8 @@ import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.controllers.ModelSearch;
-import org.maengle.model.services.ModelViewService;
 import org.maengle.model.services.ModelUpdateService;
+import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -73,7 +73,7 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록
 	@GetMapping("/register")
-	public String register(@ModelAttribute RequestModel form, Model model) {
+	public String register(@ModelAttribute("requestModel") RequestModel form, Model model) {
 		commonProcess("register", model);
 		form.setMid(UUID.randomUUID().toString());
 		form.setModelStatus(ModelStatus.READY);
@@ -81,6 +81,7 @@ public class ModelUpdateController extends CommonController {
 		return "admin/model/register";
 	}
 
+	@PostMapping
 	public String update(@PathVariable("seq") Long seq, Model model) {
 		commonProcess("update", model);
 
@@ -92,7 +93,11 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록, 수정 처리
 	@PostMapping("/register")
+<<<<<<< HEAD
 	public String saveModel(RequestModel form, Errors errors, Model model) {
+=======
+	public String saveModel( RequestModel form, Errors errors, Model model) {
+>>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
 		String mode = Objects.requireNonNullElse(form.getMode(), "add");
 		commonProcess(mode.equals("edit") ? "register" : "update", model);
 
@@ -120,6 +125,7 @@ public class ModelUpdateController extends CommonController {
 	}
 
 	// 공통 처립 부분
+	@PostMapping("/register")
 	private void commonProcess(String code, Model model) {
 		code = StringUtils.hasText(code) ? code : "list";
 		String pageTitle = "";
