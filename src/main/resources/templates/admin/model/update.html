@@ -64,14 +64,11 @@
                 <th width="120">상품설명</th>
                 <td>
                     <textarea id="description" th:field="*{description}"></textarea>
-
-                    <div class="uploaded_images" id="editor-images">
                         <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="${'file-' + seq}">
                             <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
                             <i class="xi-upload insert-editor" th:data-file-url="*{fileUrl}"></i>
                             <i class="xi-close remove" th:data-seq="*{seq}"></i>
                         </span>
-                    </div>
                 </td>
             </tr>
         </table>
