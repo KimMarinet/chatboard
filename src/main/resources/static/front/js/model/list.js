@@ -51,7 +51,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
     }
-
+// 검색 빈 문자 열 공백 제거
+document.addEventListener('DOMContent')
 
 
 
