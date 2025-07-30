@@ -85,85 +85,8 @@
         <div class="button-group">
             <!-- 버튼 추가 가능 -->
         </div>
-    </form>
-    <h1 th:text="${pageTitle}"></h1>
 
-    <form name="frmSave" method="POST" th:action="@{/admin/model/update}" th:object="${model}">
-        <th:block th:replace="~{admin/product/_form::common}"></th:block>
 
-        <table>
-            <tr>
-                <th>상품 이름</th>
-                <td>
-                    <input type="text" th:field="*{name}">
-                    <div class="error" th:each="error : ${#fields.errors('name')}" th:text="${error}"></div>
-                </td>
-            </tr>
-            <tr>
-                <th>분류</th>
-                <td>
-                    <input type="text" th:field="*{category}">
-                    <div class="error" th:each="error : ${#fields.errors('category')}" th:text="${error}"></div>
-                </td>
-            </tr>
-        </table>
-
-        <h2>상품 이미지</h2>
-        <table>
-            <tr>
-                <th>메인 이미지</th>
-                <td>
-                    <div class="uploaded" id="main_images">
-                        <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="${'file-' + seq}">
-                            <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                            <img th:src="@{/file/thumb(seq=*{seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="*{seq}">
-                        </div>
-                    </div>
-                    <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="main" data-image-only="true">이미지 추가</button>
-                </td>
-            </tr>
-            <tr>
-                <th>목록 이미지</th>
-                <td>
-                    <div class="uploaded_images" id="list-images">
-                        <div th:if="*{listImages != null}" th:each="item : *{listImages}" th:object="${item}" class="file-images" th:id="${'file-' + seq}">
-                            <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                            <img th:src="@{/file/thumb(seq=*{seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="*{seq}">
-                        </div>
-                    </div>
-                    <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="list" data-single="true" data-image-only="true">이미지 등록</button>
-                </td>
-            </tr>
-        </table>
-
-        <h2>상품 상세설명</h2>
-        <table class="table-cols mb30">
-            <tr>
-                <th width="120">상품설명</th>
-                <td>
-                    <textarea id="description" th:field="*{description}"></textarea>
-
-                    <div class="uploaded_images" id="editor-images">
-                        <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="${'file-' + seq}">
-                            <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
-                            <i class="xi-upload insert-editor" th:data-file-url="*{fileUrl}"></i>
-                            <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-        <div class="button-group">
-            <!-- 버튼 추가 가능 -->
-        </div>
-    </form>
-    <th:block th:replace="~{admin/model/_form::common}"></th:block>
-    <h1 th:text="${pageTitle}"></h1>
-    <form name="update" method="post" th:action="@{model/update}" th:object="${requestModel}">
-
-        <th:block th:replace="~{admin/model/_form::common}"></th:block>
-    </form>
 
 </section>
 </body>

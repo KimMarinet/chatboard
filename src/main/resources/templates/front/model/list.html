@@ -45,6 +45,7 @@
             <div>
                 <p>
                     <a th:href="@{chatroom/{modelName}(modelName=${model.Name})}" th:text="${model.name}"></a>광해
+                    <a th:href="/aichat">ai 채팅 하기 </a>
                 </p>
                 <p th:text="${model.explanation}">설명</p>
 
@@ -53,7 +54,6 @@
                     </a>
 
                 <p th:text="${model.explanation}">설명</p>
-
                 <p>
                    <a th:href="@{chatroom/{modelName}(modelName=${model.Name})} " th:text="${model.name}"></a>범죄와 전쟁
                 </p>
