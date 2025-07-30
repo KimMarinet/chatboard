@@ -11,19 +11,22 @@
     <h1 th:text="${pageTitle}">모델 목록</h1>
 
     <!-- 검색 폼 -->
+    <form th:action="@{/model/search}" method="get" th:field="*{search}">
+
+
+    </form>
 
 
     <!--모델 목록 -->
-    <!-- 이미지 목록 -->
+    <!-- 이미지 링크  -->
     <div>
         <div class="model-list">
             <div th:each="model:${models}" class="model-item">
                 <div>
-                    <img th:src="@{$model.imageUrl}" alt="장르별 모델 ">
+                    <img th:src="@{$model.imageUrl}" alt="광해">
                 </div>
-                <div class="model-info">
-                    <h2 th:text="${genre.title}">장르별 이름</h2>
-                    <p th:text="${genre.description}">설명</p>
+                <div class="">
+
                 </div>
             </div>
         </div>
