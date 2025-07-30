@@ -11,35 +11,23 @@
     <h1 th:text="${pageTitle}">모델 목록</h1>
 
     <!-- 검색 폼 -->
-    <form name="ListSearch" method="get" th:action="@{/model}" th:object="${search}">
-        <table>
-            <tr>
-                <th>검색 조건</th>
-                <td>
-                    <select  id="searchType" th:field="*{searchType}">
-                        <option value="ALL">전체</option>
-                        <option value="GENRE">장르별</option>
-                        <option value="COUNT">조회수별</option>
-                    </select>
-                </td>
-            </tr>
-            <div id="container">
-                    <input type="text" th:field="*{keyword}" placeholder="검색어 입력"/>
-                    <button type="submit">검색</button>
-            </div>
-        </table>
-    </form>
+
 
     <!--모델 목록 -->
-    <!--대표 이미지 링크  -->
-    <table>
-        <thead>
-        <a th:href="@{model/category}">
-            <img th:src="@{image/sample.jsp}">
-            샘플 이미지
-        </a>
-        </thead>
-    </table>
+    <!-- 이미지 목록 -->
+    <div>
+        <div class="model-list">
+            <div th:each="model:${models}" class="model-item">
+                <div>
+                    <img th:src="@{$model.imageUrl}" alt="장르별 모델 ">
+                </div>
+                <div class="model-info">
+                    <h2 th:text="${genre.title}">장르별 이름</h2>
+                    <p th:text="${genre.description}">설명</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 장르 및 감정 선택 폼 -->
     <form name="category" method="post" th:action="@{/model/create}">

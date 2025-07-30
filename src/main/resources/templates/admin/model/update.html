@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-<<<<<<< HEAD
-      layout:decorate="~{admin/layouts/index}">
-=======
-      layout:decorate="~{admin/layouts/main}">
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+      >
 
 <head>
     <th:block layout:fragment="addCommonScript">
@@ -71,20 +67,19 @@
                 <th width="120">상품설명</th>
                 <td>
                     <textarea id="description" th:field="*{description}"></textarea>
-<<<<<<< HEAD
-=======
+
 
                     <div class="uploaded_images" id="editor-images">
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                         <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="${'file-' + seq}">
                             <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
                             <i class="xi-upload insert-editor" th:data-file-url="*{fileUrl}"></i>
                             <i class="xi-close remove" th:data-seq="*{seq}"></i>
                         </span>
-<<<<<<< HEAD
-=======
+
+
                     </div>
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                 </td>
             </tr>
         </table>

@@ -1,64 +1,51 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layouts/index}">
-<head>
-    <th:block layout:fragment="addCommonScript">
-        <th:block th:replace="~{admin/_form::common}"></th:block>
-=======
-    <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org"
           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
           layout:decorate="~{/admin/layouts/index}">
-
 <head>
-    <th:block layout:fragment="addCommonScript">
-        <th:block th:replace="~{common/_editor_script::script}"></th:block>
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+    <th:block layout:fragment="addCommonScript"><th:block th:replace="~{common/_editor_script::script}"></th:block>
     </th:block>
 </head>
 
 <body>
 
 <section layout:fragment="content">
-<<<<<<< HEAD
 
     <h1 th:text="${pageTitle}">상품 등록</h1>
 
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
 
         <!-- 공통 폼 프래그먼트 호출 예시 (있으면 사용) -->
-=======
+
     <h1 th:text="${pageTitle}"></h1>
 
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" autocomplete="off" th:object="${requestModel}">
         <input type="hidden" name="gid" th:field="*{gid}">
         <input type="hidden" name="mode" value="register">
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
         <th:block th:replace="~{/model/_form::common}"></th:block>
 
         <table>
             <tr>
                 <th>상품 이름</th>
                 <td>
-<<<<<<< HEAD
+
                     <input type="text" th:field="*{name}" />
-=======
+
                     <input type="text" th:field="*{name}" name="name" />
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                     <div class="error" th:each="error : ${#fields.errors('name')}" th:text="${error}"></div>
                 </td>
             </tr>
             <tr>
                 <th>분류</th>
                 <td>
-<<<<<<< HEAD
+
                     <input type="text" th:field="*{category}" />
-=======
+
                     <input type="text" th:field="*{category}" name="category" />
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                     <div class="error" th:each="error : ${#fields.errors('category')}" th:text="${error}"></div>
                 </td>
             </tr>
@@ -71,7 +58,7 @@
                 <th>메인 이미지</th>
                 <td>
                     <div class="uploaded" id="main_images">
-<<<<<<< HEAD
+
                         <div th:if="*{mainImages != null}">
                             <div th:each="item : *{mainImages}" class="file-images" th:id="'file-' + ${item.seq}">
                                 <i class="xi-close remove" th:data-seq="${item.seq}"></i>
@@ -80,7 +67,7 @@
                         </div>
                     </div>
                     <button type="button" class="sbtn file-upload-btn" th:data-mid="*{mid}" data-location="main" data-image-only="true">이미지 추가</button>
-=======
+
                         <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="'file-' + ${item.seq}">
                             <i class="xi-close remove" th:data-seq="${item.seq}"></i>
                             <img th:src="@{/file/thumb(seq=${item.seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="${item.seq}" />
@@ -99,15 +86,14 @@
                         </div>
                     </div>
                     <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="list" data-single="true" data-image-only="true">이미지 등록</button>
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                 </td>
             </tr>
         </table>
-
         <h2>상품 상세설명</h2>
         <table class="table-cols mb30">
             <tr>
-<<<<<<< HEAD
+
                 <th>상품설명</th>
                 <td>
                     <textarea id="description" th:field="*{description}" rows="5"></textarea>
@@ -117,7 +103,12 @@
                             <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
                             <i class="xi-close remove" th:data-seq="${item.seq}"></i>
                         </span>
-=======
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
                 <th width="120">상품설명</th>
                 <td>
                     <textarea id="description" name="description" th:field="*{description}"></textarea>
@@ -127,7 +118,7 @@
                                 <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
                                 <i class="xi-close remove" th:data-seq="${item.seq}"></i>
                             </span>
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
+
                     </div>
                 </td>
             </tr>
@@ -138,17 +129,9 @@
             <button type="submit" class="btn black">등록하기</button>
         </div>
     </form>
-<<<<<<< HEAD
+
 
 </section>
 </body>
 </html>
-=======
-</section>
-</section>
-</body>
 
-</html>
-
-    </html>
->>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
