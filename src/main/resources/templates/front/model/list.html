@@ -3,45 +3,63 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 <head>
-    <title>모델 목록</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <section layout:fragment="content">
-    <h1 th:text="${pageTitle}">모델 목록</h1>
+    <h1 th:text="${pageTitle}"></h1>
 
     <!-- 검색 폼 -->
-    <form th:action="@{/model/search}" method="get" th:field="*{search}">
+    <form th:action="@{/model/search}" method="get" th:object="${search}">
         <table>
             <tr>
-                <select>
-                    <option value="ALL">전체</option>
-                    <option value="NAME">이름</option>
-                    <option value="COUNT">조회수</option>
-                </select>
+                <td>
+                    <select name="searchType" th:field="*{searchType}">
+                        <option value="ALL">전체</option>
+                        <option value="NAME">이름</option>
+                        <option value="COUNT">조회수</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="keyword" th:field="*{keyword}" placeholder="검색어를 입력하세요">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">검색</button>
+                </td>
             </tr>
         </table>
-        <tr>
-            <td>검색어</td>
-            <input type="text" name="keyword" >
-        </tr>
     </form>
-
 
     <!--모델 목록 -->
     <!-- 이미지 링크  -->
-    <div>
-        <div class="model-list">
-            <div th:each="model:${models}" class="model-item">
-                <div>
-                    <img th:src="@{$model.imageUrl}" alt="광해">
-                </div>
-                <div class="">
+    <div th:each="model : ${models}" class="model-item">
+        <div>
+            <img th:src="${model.imageUrl}" alt="장르별">
+        </div>
+        <div>
+            <p>
+                <a th:href="@{chatroom/{modelName}(modelName=${model.Name})}" th:text="${model.name}"></a>광해
+            </p>
+            <p th:text="${model.explanation}">설명</p>
 
-                </div>
-            </div>
+            <p>
+                <a th:href="@{/chatroom/{modelName}(modelName=${model.name})}" th:text="${model.name}">너의 결혼식
+                </a>
+
+            <p th:text="${model.explanation}">설명</p>
+
+            <p>
+               <a th:href="@{chatroom/{modelName}(modelName=${model.Name})} " th:text="${model.name}"></a>범죄와 전쟁
+            </p>
+            <p th:text="${model.explanation}">설명</p>
         </div>
     </div>
+
 
     <!-- 장르 및 감정 선택 폼 -->
     <form name="category" method="post" th:action="@{/model/create}">
@@ -63,12 +81,11 @@
                 <li><a th:href="@{/model(emotion='sorrow')}">슬픔</a></li>
                 <li><a th:href="@{/model(emotion='melancholy')}">우울</a></li>
         </ul>
-        <div class="category-title" onclick="togglDropdown('emotionList')">베스트 모델▼</div>
+        <div class="category-title" onclick="toggleDropdown('emotionList')">베스트 모델▼</div>
         <ul id="bestList">
-            <ul>
-                <li></li>
-            </ul>
+            <li></li>
         </ul>
+
     </form>
 </section>
 <script th:src="@{/js/script.js}"></script>

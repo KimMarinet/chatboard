@@ -100,23 +100,7 @@
                 </td>
             </tr>
         </table>
-        <h2>상품 상세설명</h2>
-        <table class="table-cols mb30">
-            <tr>
 
-                <th>상품설명</th>
-                <td>
-                    <textarea id="description" th:field="*{description}" rows="5"></textarea>
-                    <div class="uploaded_images" id="editor-images" th:if="*{editorImages != null}">
-                        <span th:each="item : *{editorImages}" class="file-items" th:id="'file-' + ${item.seq}">
-                            <a th:href="@{/file/download/{seq}(seq=${item.seq})}" th:text="${item.fileName}"></a>
-                            <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
-                            <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
         <table>
             <tr>
                 <th width="120">상품설명</th>
