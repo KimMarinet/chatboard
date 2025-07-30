@@ -7,12 +7,6 @@
     <th:block th:replace="~{common/_editor_script::script}"></th:block>
 </th:block>
 
-<head>
-    <th:block layout:fragment="addCommonScript">
-        <th:block th:replace="~{common/_editor_script::script}"></th:block>
-    </th:block>
-</head>
-
 <body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
@@ -165,6 +159,12 @@
         </div>
     </form>
     <th:block th:replace="~{admin/model/_form::common}"></th:block>
+    <h1 th:text="${pageTitle}"></h1>
+    <form name="update" method="post" th:action="@{model/update}" th:object="${requestModel}">
+
+        <th:block th:replace="~{admin/model/_form::common}"></th:block>
+    </form>
+
 </section>
 </body>
 </html>
