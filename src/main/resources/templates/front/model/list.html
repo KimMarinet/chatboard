@@ -12,8 +12,19 @@
 
     <!-- 검색 폼 -->
     <form th:action="@{/model/search}" method="get" th:field="*{search}">
-
-
+        <table>
+            <tr>
+                <select>
+                    <option value="ALL">전체</option>
+                    <option value="NAME">이름</option>
+                    <option value="COUNT">조회수</option>
+                </select>
+            </tr>
+        </table>
+        <tr>
+            <td>검색어</td>
+            <input type="text" name="keyword" >
+        </tr>
     </form>
 
 
