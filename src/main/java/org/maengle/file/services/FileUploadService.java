@@ -6,8 +6,11 @@ import org.maengle.file.controllers.RequestUpload;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.repositories.FileInfoRepository;
 import org.maengle.global.configs.FileProperties;
+import org.maengle.global.exceptions.script.AlertBackException;
+import org.maengle.global.libs.Utils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @EnableConfigurationProperties(FileProperties.class)
 public class FileUploadService {
+    private final Utils utils;
     private final FileProperties fileProperties;
     private final FileInfoRepository repository;
 
@@ -38,7 +42,7 @@ public class FileUploadService {
         MultipartFile[] files = uploadForm.getFiles();
         if (files == null || files.length == 0) {
             // 파일 업로드 X
-            return null; // AlertBackException 정의 필요 정의 후 utils도 손봐야 함.
+            throw new AlertBackException(utils.getMessage("NotUpload.file"), HttpStatus.BAD_REQUEST);
         }
         // 하나의 파일만 업로드
         if (single) {

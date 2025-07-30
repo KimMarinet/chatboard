@@ -4,12 +4,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
 import org.maengle.board.entities.BoardData;
+import org.maengle.board.services.BoardInfoService;
 import org.maengle.board.services.BoardUpdateService;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.board.validators.BoardValidator;
 import org.maengle.file.constants.FileStatus;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
+import org.maengle.global.search.ListData;
+import org.maengle.member.libs.MemberUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -28,8 +31,10 @@ import java.util.UUID;
 @SessionAttributes({"board"})
 public class BoardController {
 
+    private final MemberUtil memberUtil;
     private final BoardConfigInfoService configInfoService;
     private final BoardUpdateService updateService;
+    private final BoardInfoService infoService;
     private final FileInfoService fileInfoService;
     private final BoardValidator boardValidator;
 
@@ -42,6 +47,11 @@ public class BoardController {
     @GetMapping("/list/{bid}")
     public String list(@PathVariable("bid") String bid, @ModelAttribute BoardSearch search, Model model) {
         commonProcess(bid, "list", model);
+
+        ListData<BoardData> data = infoService.getList(bid, search);
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
         return "front/board/list";
     }
 
@@ -52,13 +62,19 @@ public class BoardController {
         form.setBid(bid);
         form.setGid(UUID.randomUUID().toString());
 
+        if (memberUtil.isLogin()) {
+            form.setPoster(memberUtil.getMember().getName());
+        }
+
         return "front/board/write";
     }
 
     // 게시글 수정
     @GetMapping("/update/{seq}")
     public String update(@PathVariable("seq") Long seq, Model model) {
-        commonProcess(String.valueOf(seq), "update", model);
+        commonProcess(seq, "update", model);
+        RequestBoard form = infoService.getForm(seq);
+        model.addAttribute("requestBoard", form);;
 
         return "front/board/update";
     }
@@ -85,6 +101,23 @@ public class BoardController {
         return "redirect:/board/list/" + form.getBid();
     }
 
+    // 게시글 보기
+    @GetMapping("/view/{seq}")
+    public String view(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "view", model);
+
+        return "front/board/view";
+    }
+
+    // 게시글 삭제
+    @GetMapping("/delete/{seq}")
+    public String delete(@PathVariable("seq") Long seq, Model model, @SessionAttribute("board") Board board) {
+        commonProcess(seq, "delete", model);
+
+        return "redirect:/board/list/" + board.getBid();
+    }
+
+
     private void commonProcess(String bid, String mode, Model model) {
         Board board = configInfoService.get(bid);
         mode = StringUtils.hasText(mode) ? mode : "list";
@@ -110,6 +143,9 @@ public class BoardController {
             }
 
             addScript.add(String.format("board/%s/form", skin)); // 스킨별 양식 관련 자바스크립트
+        } else if (mode.equals("view")) { // 게시글 보기
+            BoardData item = (BoardData)model.getAttribute("item");
+            pageTitle = item.getSubject() + " - " + pageTitle;
         }
 
         model.addAttribute("addCommonScript", addCommonScript);
@@ -117,5 +153,22 @@ public class BoardController {
         model.addAttribute("addCss", addCss);
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("board", board);
+        model.addAttribute("mode", mode);
+    }
+
+    /**
+     * seq 기준의 공통 처리
+     *  - 게시글 조회가 공통 처리 ...
+     * @param seq
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(Long seq, String mode, Model model) {
+        BoardData item = infoService.get(seq);
+
+        model.addAttribute("item", item);
+
+        Board board = item.getBoard();
+        commonProcess(board.getBid(), mode, model);
     }
 }

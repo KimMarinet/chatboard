@@ -42,7 +42,7 @@ public class ModelViewService {
 		return item;
 	}
 
-	// 상품 조회
+	// 모델 조회
 	public RequestModel getForm(Long seq) {
 		Model item = get(seq);
 		return modelMapper.map(item, RequestModel.class);
@@ -99,12 +99,11 @@ public class ModelViewService {
 		return new ListData<>(items, pagination);
 	}
 
-	// 상품 추가 정보 처리
+	// 모델 추가 정보 처리
 	private void addInfo(Model item) {
 		// 업로드한 파일 처리
-		String mid = item.getMid();
-		item.setMainImages(fileInfoService.getList(mid, "main"));
-		item.setListImages(fileInfoService.getList(mid, "list"));
+		item.setMainImages(fileInfoService.getList(item.getGid(), "main"));
+		item.setListImages(fileInfoService.getList(item.getGid(), "list"));
 	}
 
 

@@ -10,23 +10,23 @@ import java.util.List;
 
 @Data
 public class RequestModel {
-	private String mode; // add - 추가, edit - 수정
-	private Long seq;
+    private String mode; // add - 추가, edit - 수정
+    private Long seq;
 
-	@NotBlank
-	private String mid;
+    @NotBlank
+    private String gid;
 
-	@NotBlank
-	private String name;
-	private String category;
+    @NotBlank
+    private String name;
+    private String category;
 
-	@NotNull
-	private ModelStatus modelStatus;
+    @NotNull
+    private ModelStatus modelStatus;
 
-	private Long count;
+    private Long count;
 
-	private String description;
+    private String description;
 
-	private List<FileInfo> listImages;
-	private List<FileInfo> mainImages;
+    private List<FileInfo> listImages;
+    private List<FileInfo> mainImages;
 }

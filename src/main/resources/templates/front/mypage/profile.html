@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+
+<section layout:fragment="content">
+    <h1 class="main-title" th:text="${pageTitle}"></h1>
+    <form name="frmProfile" method="POST" th:action="@{/mypage/profile}" autocomplete="off" th:object="${requestProfile}">
+        <input type="hidden" name="_method" value="PATCH">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+        <dl>
+            <dt th:text="#{회원명}"></dt>
+            <dd>
+                <input type="text" name="name" th:field="*{name}">
+                <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd th:text="${loggedMember.email}"></dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{성별}"></dt>
+            <dd>
+                <span th:each="gen : ${genders}" >
+                    <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}" class="radio-input">
+                    <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
+                </span>
+                <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{휴대전화번호}"></dt>
+            <dd>
+                <input type="text" name="mobile" th:field="*{mobile}">
+                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{프로필_이미지}"></dt>
+            <dd>
+                <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                    <div th:text="#{이미지_변경하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
+                    <div class="inner">
+                        <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                            <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
+                            <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+        <button type="submit" th:text="#{수정하기}"></button>
+    </form>
+    <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+</section>
+</html>

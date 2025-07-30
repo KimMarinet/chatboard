@@ -36,16 +36,16 @@
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
 <body>
-<!-- popup 처리용 -->
-<th:block th:if="${param.popup == null || !param.popup}">
-    <header th:replace="~{front/outlines/_header::common}"></header>
-</th:block>
+    <!-- popup 처리용 -->
+    <th:block th:if="${param.popup == null || !param.popup}">
+        <header th:replace="~{front/outlines/_header::common}"></header>
+    </th:block>
 
-<main layout:fragment="content"></main>
+    <main layout:fragment="content"></main>
 
-<th:block th:if="${param.popup == null || !param.popup}">
-    <footer th:replace="~{front/outlines/_footer::common}"></footer>
-</th:block>
-<iframe name="ifrmProcess" class="dn"></iframe>
+    <th:block th:if="${param.popup == null || !param.popup}">
+        <footer th:replace="~{front/outlines/_footer::common}"></footer>
+    </th:block>
+    <iframe name="ifrmProcess" class="dn"></iframe>
 </body>
 </html>

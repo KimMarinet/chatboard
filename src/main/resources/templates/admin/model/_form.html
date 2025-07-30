@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="common" th:object="${requestModel}">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+    <h2>모델 기본정보</h2>
+    <table class="table-cols mb30">
+        <tr>
+            <th width="120">모델명</th>
+            <td>
+                <input type="text" name="name" th:field="*{name}">
+                <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>모델분류</th>
+            <td>
+                <input type="text" name="category" th:field="*{category}">
+                <div class="error" th:each="err : ${#fields.errors('category')}" th:text="${err}"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>모델상태</th>
+            <td>
+                <span th:each="status : ${statusList}">
+                    <input type="radio" name="modelStatus" th:id="${'status-' + status.name()}" th:value="${status.name()}" th:field="*{modelStatus}">
+                    <label th:for="${'status-' + status.name()}" th:text="${#messages.msg('modelStatus.' + status.name())}"></label>
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <h2>모델 이미지</h2>
+    <table class="table-cols mb30">
+        <tr>
+            <th width="120">메인 이미지</th>
+            <td>
+                <div class="uploaded_images" id="main-images" th:classappend="*{mainImages != null} ? 'uploaded'">
+                    <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
+                    <div class="inner">
+                        <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="*{'file-' + mainImages.seq}">
+                            <i class="xi-close remove" th:data-seq="*{seq}"></i>
+                            <img th:src="@{/file/thumb?seq={seq}&width=200&height=200&crop=true(seq=*{seq})}" class="image show-image" th:data-seq="*{mainImages.seq}">
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>목록 이미지</th>
+            <td>
+                <div class="uploaded_images" id="list-images">
+                    <div th:if="*{listImages != null}" th:each="item : *{listImages}" th:object="${item}" class="file-images" th:id="*{'file-' + seq}">
+                        <i class="xi-close remove" th:data-seq="*{seq}"></i>
+                        <img th:src="@{/file/thumb?seq={seq}&width=200&height=200&crop=true(seq=*{seq})}" class="image show-image" th:data-seq="*{seq}">
+                    </div>
+                </div>
+                <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="list" data-single="true" data-image-only="true">이미지 등록</button>
+            </td>
+        </tr>
+    </table>
+
+    <h2>모델 상세설명</h2>
+    <table class="table-cols mb30">
+        <tr>
+            <th width="120">상품설명</th>
+            <td>
+                <textarea id="description" name="description" th:field="*{description}"></textarea>
+            </td>
+        </tr>
+    </table>
+    <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+</th:block>
+</html>

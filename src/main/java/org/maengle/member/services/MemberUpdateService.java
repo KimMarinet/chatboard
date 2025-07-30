@@ -6,6 +6,7 @@ import org.maengle.global.exceptions.script.AlertException;
 import org.maengle.global.libs.Utils;
 import org.maengle.member.entities.Member;
 import org.maengle.member.repositories.MemberRepository;
+import org.maengle.mypage.controllers.RequestProfile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,12 @@ public class MemberUpdateService {
         }
 
         repository.saveAllAndFlush(members);
+    }
+
+
+    // 회원정보 수정 처리
+    // 일단 구성만 한 상태, 강사님이 진행 시작하실 부분
+    public void process(RequestProfile form) {
+
     }
 }

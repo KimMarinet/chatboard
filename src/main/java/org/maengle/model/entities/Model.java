@@ -21,7 +21,7 @@ public class Model extends BaseEntity {
     private Long seq;
 
     @Column(length = 45, nullable = false)
-    private String mid;
+    private String gid;
 
     @Column(length = 150, nullable = false)
     private String name;
@@ -30,7 +30,7 @@ public class Model extends BaseEntity {
     private ModelStatus modelStatus;
 
     @Column
-    private String category; // 미정
+    private String category;
 
     @Column
     private Long count; // 조회수

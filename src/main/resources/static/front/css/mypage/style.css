@@ -1,11 +1,12 @@
 main {
     display: flex;
+    min-height: 600px;
 }
 
 main > aside {
     width: 210px;
-    margin-right: 25px;
-    background: #ccc;
+    background: #f8f8f8;
+
 }
 
 main > section {
@@ -14,9 +15,17 @@ main > section {
 
 main > aside .menu {
     display: block;
-    padding: 15px 20px;
+    padding: 20px 25px;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.1rem;
 }
 
 main > aside .menu.on {
-    background: 000;
+    background: #1E9EFF;
+    color: #fff;
+    border-color: #1E9EFF;
+}
+
+main > section {
+    padding: 50px;
 }

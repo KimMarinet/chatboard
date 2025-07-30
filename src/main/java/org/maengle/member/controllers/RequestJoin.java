@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.member.constants.Gender;
+import org.maengle.member.social.constants.SocialType;
+import org.springframework.util.StringUtils;
 
 @Data
 public class RequestJoin {
@@ -17,17 +19,12 @@ public class RequestJoin {
     private String userId;
 
     @Size(min=8)
-    @NotBlank
     private String password;
 
-    @NotBlank
     private String confirmPassword;
 
     @NotBlank
     private String name;
-
-    @NotBlank
-    private String idNumber;
 
     @NotNull
     private Gender gender;
@@ -44,5 +41,10 @@ public class RequestJoin {
 
     private FileInfo profileImage;
 
+    private SocialType socialType;
+    private String socialToken;
 
+    public boolean isSocial(){
+        return socialType != null && socialType != SocialType.NONE && StringUtils.hasText(socialToken);
+    }
 }

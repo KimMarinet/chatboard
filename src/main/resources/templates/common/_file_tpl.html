@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- 사용할때는 아래와 같이 사용
- <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+    <input type="hidden" name="gid" th:field="*{gid}">
+    <script th:replace="~{common/_file_tpl::image_tpl}"></script>
  -->
 <script th:fragment="image_tpl" id="image-tpl" type="text/html">
     <div class="file-images" id="file-[seq]">

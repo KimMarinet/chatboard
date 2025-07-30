@@ -36,6 +36,19 @@ spring:
       maxRequestSize: 60MB
       fileSizeThreshold: 30MB
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username} # 이메일을 보내는 주최
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true # 사용자 인증 시도 여부 - 기본값 false
+          timeout: 5000
+          starttls:
+            enable: true
+
 logging:
   level:
     org.hibernate.type: trace
@@ -61,6 +74,14 @@ springdoc:
   paths-to-match:
     - /api/**
 
+# 소셜 로그인 API 설정
+social:
+  kakao.apikey: ${kakao.apikey}
+  naver.apikey: ${naver.apikey}
+  naver.secret: ${naver.secret}
+
+chatbot:
+  api.url: ${chatbot.url}
 python:
   path:
     base: ${python.base}

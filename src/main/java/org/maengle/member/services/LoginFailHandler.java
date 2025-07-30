@@ -30,7 +30,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 
         String popup = request.getParameter("popup");
 
-
         List<String> fieldErrors = new ArrayList<>();
         List<String> globalErrors = new ArrayList<>();
 
@@ -50,7 +49,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
                 // pw 란이 비어 있는 경우
                 fieldErrors.add("password_NotBlank");
             }
-
 
             if(fieldErrors.isEmpty()){
                 // 모든 필수항목을 입력하였으나 대조되는 데이터가 없는 경우
@@ -76,8 +74,11 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
             return;
         }
 
+
+        String addQs = "?popup=true";
+        //popup != null && popup.equals("true") ? "?popup=true":"";
+
         // 로그인 실패 후 돌아오면 로그인 form에 입력한 값이 적혀 있음
-        String addQs = popup != null && popup.equals("true") ? "?popup=true":"";
         session.setAttribute("requestLogin", form);
         response.sendRedirect(request.getContextPath() + "/member/login" + addQs);
     }
