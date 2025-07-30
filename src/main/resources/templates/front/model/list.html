@@ -3,8 +3,7 @@
           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
           layout:decorate="~{front/layouts/index}">
     <head>
-        <title></title>
-        <link rel="stylesheet" th:href="@{/css/style.css}" />
+        <link rel="stylesheet" th:href="@{front/css/model/style.css}">
     </head>
     <body>
     <section layout:fragment="content">
@@ -24,7 +23,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" name="keyword" th:field="*{keyword}" placeholder="검색어를 입력하세요">
+                        <input type="text" name="keyword" th:field="*{keyword}" style="test-alian:right" value="오른쪽 정렬" placeholder="검색어를 입력하세요">
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +88,7 @@
 
         </form>
     </section>
-    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/front/js/model/script.js}"></script>
     </body>
 
     </html>

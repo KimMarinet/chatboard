@@ -16,6 +16,7 @@ select, input[type="text"], button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  test-alian : right:
 }
 
 button {
@@ -28,3 +29,33 @@ button {
 button:hover {
   background-color: #45a049;
 }
+.category-title {
+
+    cursor: pointer;
+    font-weight: bold;
+    margin: 8px 0 4px;
+    user-select: none;
+}
+
+.category-title-hover {
+    color: #007BFF;
+}
+
+#genreList, #emotionList , #bastList {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: none;
+}
+
+#genreList li , #emotionList li , #bastList li {
+
+    padding: 4px 0;
+}
+
+#genreList li a:hover , #emotionList ii a:hover {
+    test-decoration: underline;
+    color: #007BFF;
+}
+
