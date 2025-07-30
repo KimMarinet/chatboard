@@ -7,7 +7,7 @@
 }
 
 html {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 body {
@@ -37,19 +37,43 @@ img {
     border: 0;
 }
 
+h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+}
+
+/* 제목 공통 */
+h1.main-title {
+    font-size: 1.35rem;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #000;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.layout-width {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0;
+}
+
 /* ---------- 프론트 스타일 초기화 E ----------  */
 
 
 
 /* ---------- 헤더 영역 S ---------- */
 
+header {
+    border-bottom: 1px solid #f0f0f0;
+}
+
 .site-header {
   background-color: #3399ff;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 15px;
+  padding: 10px 18px 8px 30px
 }
 
 .logo-box{
@@ -61,7 +85,7 @@ img {
     display: inline-block;
 }
 
-.site-logo {
+header .site-logo {
     display: block;
     width: 60px;
     margin: 0px;
@@ -71,26 +95,110 @@ img {
     text-decoration: none;
 }
 
-.user-actions a {
+header .right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+header #site-main-search {
+    background: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.5%);
+    border-radius: 8px;
+    height: 40px;
+    padding: 10px;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+header #site-main-search svg {
+    color: #a5a5a5;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+header #site-main-search input[type='text']{
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    color: #141414;
+    caret-color: #1E9EFF;
+    flex-grow: 1;
+    border: 0;
+    background: #f5f5f5;
+}
+
+header .right a, button {
+    color: #787878;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+}
+header .right button {
+    background: transparent;
+    border: 0;
+}
+
+header nav > div {
+    display: flex;
+    height: 52px;
+    padding: 0 18px 0 30px !important;
+}
+header nav a {
+    line-height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 12px;
+}
+
+header nav a:hover {
+    color: #787878;
+}
+
+header nav a.on {
+    color: #1E9EFF;
+}
+
+header .user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+header .user-actions > * {
+  display: flex;
+  align-items: center;
+}
+
+
+header .user-actions a {
   margin: 10px 0px;
   font-size: 14px;
-  color: #0077cc;
+  color: #000;
   text-decoration: none;
 }
 
-.user-actions a:hover {
+header .user-actions .dot {
+    color: #e6e6e6;
+    margin: 0 12px;
+}
+
+header .user-actions a:hover {
   text-decoration: underline;
 }
 
 @media (max-width: 600px) {
-  .site-header {
+  header .site-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
 
-  .user-actions {
+  header .user-actions {
     align-self: flex-end;
+    justify-content: center;
   }
 }
 
@@ -169,3 +277,31 @@ footer-title {
 }
 
 /* ---------- 푸터 영역 ---------- E */
+
+/* ---------- 메인 영역 ---------- S */
+
+
+/* ---------- 메인 영역 ---------- E */
+
+/* ------- 마이페이지 영역 ------- S */
+
+
+
+/* ------- 마이페이지 영역 ------- E */
+
+
+/* ---------- 프로필 영역 ---------- S */
+
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .profile-image {
+    overflow: hidden;
+    border-radius: 50%; /* 프로필을 원형으로 */
+    background-color: #f0f0f0; /* 배경으로 구분 */
+}
+
+/* ---------- 프로필 영역 ---------- E */

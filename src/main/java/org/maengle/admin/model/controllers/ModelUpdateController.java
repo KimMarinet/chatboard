@@ -2,7 +2,6 @@ package org.maengle.admin.model.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
-import org.maengle.file.constants.FileStatus;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
@@ -16,10 +15,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @ApplyCommonController
@@ -73,15 +70,16 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록
 	@GetMapping("/register")
-	public String register(@ModelAttribute("requestModel") RequestModel form, Model model) {
+	public String register(@ModelAttribute org.maengle.model.entities.Model item , Model model) {
 		commonProcess("register", model);
-		form.setMid(UUID.randomUUID().toString());
-		form.setModelStatus(ModelStatus.READY);
+		item.setGid(UUID.randomUUID().toString());
+		item.setModelStatus(ModelStatus.READY);
+
+		model.addAttribute("requestModel", item);
 
 		return "admin/model/register";
 	}
 
-	@PostMapping
 	public String update(@PathVariable("seq") Long seq, Model model) {
 		commonProcess("update", model);
 
@@ -91,22 +89,19 @@ public class ModelUpdateController extends CommonController {
 		return "admin/model/update";
 	}
 
-	// 상품 등록, 수정 처리
+	// 모델 등록, 수정 처리
 	@PostMapping("/register")
-
-
-
-	public String saveModel( RequestModel form, Errors errors, Model model) {
-
+	public String saveModel(RequestModel form, Errors errors, Model model) {
 		String mode = Objects.requireNonNullElse(form.getMode(), "add");
-		commonProcess(mode.equals("edit") ? "register" : "update", model);
+		commonProcess(mode.equals("edit") ? "update" : "register", model);
+
+		// gid가 null이면 UUID로 생성
+		if (!StringUtils.hasText(form.getGid())) {
+			form.setGid(UUID.randomUUID().toString());
+		}
 
 		if (errors.hasErrors()) {
 			// 검증 실패시에 업로드된 파일 정보를 유지
-			String mid = form.getMid();
-			form.setListImages(fileInfoService.getList(mid, "list", FileStatus.ALL));
-			form.setMainImages(fileInfoService.getList(mid, "main", FileStatus.ALL));
-
 			return "admin/model/" + (mode.equals("edit") ? "update" : "register");
 		}
 
@@ -116,16 +111,16 @@ public class ModelUpdateController extends CommonController {
 		return "redirect:/admin/model";
 	}
 
-	// 상품 분류 관리
-	@GetMapping("/category")
-	public String category(Model model) {
-		commonProcess("category", model);
+	// 상품 수정, 삭제 관리
+	@GetMapping("/update")
+	public String update(Model model) {
+		commonProcess("update", model);
+		model.addAttribute("requestModel", new RequestModel());
 
-		return "admin/model/category";
+		return "admin/model/update";
 	}
 
-	// 공통 처립 부분
-
+	// 공통 처리 부분
 	private void commonProcess(String code, Model model) {
 		code = StringUtils.hasText(code) ? code : "list";
 		String pageTitle = "";
@@ -133,15 +128,20 @@ public class ModelUpdateController extends CommonController {
 		List<String> addCommonScript = new ArrayList<>();
 		List<String> addScript = new ArrayList<>();
 
-		if (List.of("register", "update").contains(code)) { // 상품 등록 또는 수정
+		if (List.of("register", "update").contains(code)) { // 모델 등록 또는 수정
 			addCommonScript.add("fileManager");
-			addScript.add("model/form"); // 파일 업로드 후속 처리 또는 양ㅅ긱 처리 관련
-			pageTitle = code.equals("update") ? "상품정보 수정" : "상품등록";
+			addScript.add("model/form"); // 파일 업로드 후속 처리 또는 양식 처리 관련
+			pageTitle = code.equals("update") ? "모델정보 수정" : "모델등록";
+
+			List<ModelStatus> statusList = code.equals("update")
+					? Arrays.asList(ModelStatus.values()) // 모두 포함 (READY, ACTIVE, DELETED)
+					: Arrays.stream(ModelStatus.values()) // DELETED 제외
+					.filter(status -> status != ModelStatus.DELETED)
+					.collect(Collectors.toList());
+			model.addAttribute("statusList", statusList);
 
 		} else if (code.equals("list")) {
-			pageTitle = "상품목록";
-		} else if (code.equals("category")) {
-			pageTitle = "분류관리";
+			pageTitle = "모델목록";
 		}
 
 		model.addAttribute("pageTitle", pageTitle);

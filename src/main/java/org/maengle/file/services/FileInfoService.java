@@ -111,4 +111,5 @@ public class FileInfoService {
     public String getFilePath(FileInfo item) {
         return String.format("%s/%s/%s", fileProperties.getPath(), folder(item), item.getSeq()+ Objects.requireNonNullElse(item.getExtension(),""));
     }
+
 }

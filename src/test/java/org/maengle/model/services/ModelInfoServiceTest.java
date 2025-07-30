@@ -43,7 +43,7 @@ class ModelInfoServiceTest {
         Long seq = 1L;
         Model model = new Model();
         model.setSeq(seq);
-        model.setMid("1234");
+        model.setGid("1234");
         model.setName("샘플 모델");
         model.setCategory("카테고리");
         model.setDescription("상세 설명");
@@ -61,14 +61,14 @@ class ModelInfoServiceTest {
         Model result = modelInfoService.get(seq);
 
         assertNotNull(result);
-        assertEquals("1234", result.getMid());
+        assertEquals("1234", result.getGid());
         assertEquals("샘플 모델", result.getName());
         assertEquals("카테고리", result.getCategory());
         assertEquals("상세 설명", result.getDescription());
         assertEquals("main1.jpg", result.getMainImages().get(0).getFileName());
         assertEquals("list1.jpg", result.getListImages().get(0).getFileName());
 
-        System.out.println("▶ MID: " + result.getMid());
+        System.out.println("▶ GID: " + result.getGid());
         System.out.println("▶ 이름: " + result.getName());
         System.out.println("▶ 카테고리: " + result.getCategory());
         System.out.println("▶ 설명: " + result.getDescription());

@@ -11,13 +11,16 @@
     <html xmlns:th="http://www.thymeleaf.org"
           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
           layout:decorate="~{/admin/layouts/index}">
+
 <head>
     <th:block layout:fragment="addCommonScript">
         <th:block th:replace="~{common/_editor_script::script}"></th:block>
 >>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
     </th:block>
 </head>
+
 <body>
+
 <section layout:fragment="content">
 <<<<<<< HEAD
 
@@ -29,6 +32,9 @@
 =======
     <h1 th:text="${pageTitle}"></h1>
 
+    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" autocomplete="off" th:object="${requestModel}">
+        <input type="hidden" name="gid" th:field="*{gid}">
+        <input type="hidden" name="mode" value="register">
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
 >>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd
         <th:block th:replace="~{/model/_form::common}"></th:block>
@@ -58,6 +64,7 @@
             </tr>
         </table>
 
+        <th:block th:replace="~{admin/model/_form::common}"></th:block>
         <h2>상품 이미지</h2>
         <table>
             <tr>
@@ -127,7 +134,8 @@
         </table>
 
         <div class="button-group">
-            <button type="submit" class="btn btn-primary">저장</button>
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn black">등록하기</button>
         </div>
     </form>
 <<<<<<< HEAD
@@ -139,6 +147,8 @@
 </section>
 </section>
 </body>
+
+</html>
 
     </html>
 >>>>>>> 66c40f510fe383d64d8b829caeb7eef5261ef1fd

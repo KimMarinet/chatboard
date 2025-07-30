@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.constants.Authority;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 @Data
 @Entity
@@ -46,5 +49,17 @@ public class Board extends BaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Authority commentAuthority; // 댓글 작성 권한
+
+
+
+    public List<String> getCategories() {
+        if (!StringUtils.hasText(category)) {
+            return List.of();
+        }
+
+        String[] categories = category.replaceAll("\r", "").split("\n");
+
+        return Arrays.stream(categories).filter(StringUtils::hasText).toList();
+    }
 
 }

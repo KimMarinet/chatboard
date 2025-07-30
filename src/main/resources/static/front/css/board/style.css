@@ -1,0 +1,45 @@
+form[name="frmSave"] {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+
+dl {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+dt {
+    width: 100px;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 10px;
+    color: #0077cc;
+}
+
+dd {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #66b2ff;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f0f8ff;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #0077cc;
+    background-colo

@@ -91,6 +91,10 @@ input#terms-agree {
 
 /* ---------- 회원 로그인 페이지 S ---------- */
 
+.error{
+    margin-bottom: 15px;
+}
+
 .social-link-img{
     width: 100%;
 }

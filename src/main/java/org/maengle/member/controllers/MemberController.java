@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +84,11 @@ public class MemberController {
         joinService.process(form);
 
         // 회원가입 성공시
-        return "redirect:/member/login";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
-    public String login(@ModelAttribute RequestLogin form, Errors errors, Model model){
+    public String login(@ModelAttribute RequestLogin form, Errors errors, Model model, SessionStatus sessionStatus){
         commonProcess("login", model);
 
         /* 검증 실패 처리 S */
@@ -98,7 +99,6 @@ public class MemberController {
                 String[] value = s.split("_");
                 errors.rejectValue(value[0], value[1]);
             });
-
         }
         List<String> globalErrors = form.getGlobalErrors();
         if (globalErrors != null) {
@@ -108,6 +108,8 @@ public class MemberController {
 
         model.addAttribute("kakaoLoginUrl", kakaoLoginService.getLoginUrl(form.getRedirectUrl()));
         model.addAttribute("naverLoginUrl", naverLoginService.getLoginUrl(form.getRedirectUrl()));
+
+        sessionStatus.setComplete();
 
         return "front/member/login";
     }
@@ -123,8 +125,8 @@ public class MemberController {
 
         if (mode.equals("join")) {
             pageTitle = utils.getMessage("회원가입");
-            addCommonScript.add("fileManager");
 
+            addCommonScript.add("fileManager");
             addScript.add("member/form");
 
         } else if (mode.equals("login")) {

@@ -38,7 +38,7 @@ public class ModelUpdateServiceTest {
     @Test
     void test1() {
         RequestModel form = new RequestModel(); // 가상 폼 데이터, seq 제외하고 설정
-        form.setMid("model_001");
+        form.setGid("model_001");
         form.setName("테스트모델");
         form.setDescription("설명");
 
@@ -60,14 +60,14 @@ public class ModelUpdateServiceTest {
     @Test
     void test2() {
         Model origin = new Model(); // 기존 모델 저장
-        origin.setMid("model_002");
+        origin.setGid("model_002");
         origin.setName("원래이름");
         origin.setDescription("원래설명");
         modelRepository.saveAndFlush(origin);
 
         RequestModel form = new RequestModel();
         form.setSeq(origin.getSeq());
-        form.setMid("model_002");
+        form.setGid("model_002");
         form.setName("수정된이름");
         form.setDescription("수정된설명");
 
@@ -88,7 +88,7 @@ public class ModelUpdateServiceTest {
     @Test
     void test3() {
         Model model = new Model();
-        model.setMid("test_del");
+        model.setGid("test_del");
         model.setName("삭제테스트");
         modelRepository.saveAndFlush(model);
 
@@ -118,7 +118,7 @@ public class ModelUpdateServiceTest {
     @Test
     void test4() {
         Model model = new Model();
-        model.setMid("test_active");
+        model.setGid("test_active");
         model.setName("상태 변경 테스트");
         modelRepository.saveAndFlush(model);
 

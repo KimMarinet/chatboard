@@ -16,22 +16,24 @@
                     <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
                     <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
                 </li>
+                <li>
+                    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+                </li>
             </ul>
             <div class="join_btn">
-                <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link"></a>
+                <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link" target="_top"></a>
                 <a th:href="@{/member/findid}" th:text="#{아이디_비밀번호_찾기}" class="btn-link"></a>
             </div>
             <div class="login_btn">
-                <button type="submit" th:text="#{로그인}"></button>
-                <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+                <button type="submit" th:text="#{로그인}" class="btn modal-open" data-width="450" data-height="650" data-url="/member/login" th:data-title="#{맹글 놀이터}"></button>
             </div>
             <div class="social_btn">
-                <a th:href="${kakaoLoginUrl}">
+                <a th:href="${kakaoLoginUrl}" target="_top">
                     <img th:src="@{/common/images/kakao_login.png}" alt="카카오 로그인 버튼" class="social-link-img">
                 </a>
             </div>
             <div class="social_btn">
-                <a th:href="${naverLoginUrl}">
+                <a th:href="${naverLoginUrl}" target="_top">
                     <img th:src="@{/common/images/naver_login.png}" alt="네이버 로그인 버튼" class="social-link-img">
                 </a>
             </div>

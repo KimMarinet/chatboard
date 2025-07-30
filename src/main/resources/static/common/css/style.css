@@ -5,9 +5,7 @@
 }
 
 body {
-  background: #fff;
   align-items: center;
-  font-family: "Segoe UI", sans-serif;
 }
 
 .dn {
@@ -47,4 +45,24 @@ body {
     margin-bottom: 15px;
     border-bottom: 2px solid #000;
 }
+
+
+.header-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: inherit;        /* 글자색 상속 */
+}
+
+.header-profile .profile-image {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
 

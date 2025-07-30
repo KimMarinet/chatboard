@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- mypage용 layout 가져오기 -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
     <section layout:fragment="content">
-        <h1>마이 페이지</h1>
+        <h1 class="main-title" th:text="${pageTitle}"></h1>
     </section>
 </html>

@@ -4,7 +4,6 @@ server:
     session.cookie.name: 66e56riA66e56riA
 
 spring:
-
   # 레디스 연동
   data:
     redis:
@@ -35,6 +34,19 @@ spring:
       maxFileSize: 20MB
       maxRequestSize: 60MB
       fileSizeThreshold: 30MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username} # 이메일을 보내는 주최
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true # 사용자 인증 시도 여부 - 기본값 false
+          timeout: 5000
+          starttls:
+            enable: true
 
 logging:
   level:

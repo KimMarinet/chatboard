@@ -84,6 +84,17 @@
                 <label for="comment-false">미사용</label>
             </td>
         </tr>
+        <tr>
+            <th>글작성 후 이동</th>
+            <td>
+                <input type="radio" name="afterWritingRedirect" value="true" id="afterWritingRedirect-true" th:field="*{afterWritingRedirect}">
+                <label for="afterWritingRedirect-true">글보기</label>
+
+                <input type="radio" name="afterWritingRedirect" value="false" id="afterWritingRedirect-false" th:field="*{afterWritingRedirect}">
+                <label for="afterWritingRedirect-false">글목록</label>
+            </td>
+        </tr>
+    </table>
     </table>
 
     <h2>분류설정</h2>

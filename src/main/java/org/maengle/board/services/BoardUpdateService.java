@@ -49,6 +49,14 @@ public class BoardUpdateService {
         item.setSubject(form.getSubject());
         item.setContent(form.getContent());
 
+        if (memberUtil.isAdmin()) {
+            item.setNotice(form.isNotice());
+        } else {
+            item.setNotice(false); // 공지글은 관리자만 설정 가능
+        }
+
+        item.setPlainText(!board.isEditor());
+
         boardDataRepository.saveAndFlush(item);
 
         // 파일 업로드 완료 처리
