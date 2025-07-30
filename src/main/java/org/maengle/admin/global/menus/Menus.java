@@ -34,12 +34,25 @@ public class Menus {
 
 
 
+
         // 모델 관리
         menus.put("model" , List.of(
                 new Menu("list", "모델 목록", "/admin/model/list"),
                 new Menu("register" , "모델 등록" , "/admin/model/register"),
-                new Menu("category", "모델 수정", "/admin/model/update")
+                new Menu("update", "모델 수정", "/admin/model/update")
         ));
+
+
+
+
+        // 모델 관리
+        menus.put("model" , List.of(
+                new Menu("list", "모델 목록", "/admin/model/list"),
+                new Menu("register" , "모댈 등록" , "admin/model/register"),
+                new Menu("category", "카테고리", "admin/model/category")
+        ));
+
+
 
     }
 
@@ -47,7 +60,4 @@ public class Menus {
     public static List<Menu> getMenus(String mainCode) {
         return menus.getOrDefault(mainCode, List.of());
     }
-
-
-
 }

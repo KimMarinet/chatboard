@@ -29,4 +29,7 @@ public class RequestModel {
 
     private List<FileInfo> listImages;
     private List<FileInfo> mainImages;
+
+
+
 }

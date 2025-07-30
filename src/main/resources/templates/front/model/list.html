@@ -4,57 +4,74 @@
       layout:decorate="~{front/layouts/index}">
 <head>
     <title>모델 목록</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <section layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-<form name="ListSearch" method="get" th:action="@{/model/list}" th:object="${search}">
-    <table>
+    <h1 th:text="${pageTitle}">모델 목록</h1>
+
+    <!-- 검색 폼 -->
+    <form th:action="@{/model/search}" method="get" th:field="*{search}">
+        <table>
+            <tr>
+                <select>
+                    <option value="ALL">전체</option>
+                    <option value="NAME">이름</option>
+                    <option value="COUNT">조회수</option>
+                </select>
+            </tr>
+        </table>
         <tr>
-            <th>검색어</th>
-            <td>
+            <td>검색어</td>
+            <input type="text" name="keyword" >
+        </tr>
+    </form>
+
+
+    <!--모델 목록 -->
+    <!-- 이미지 링크  -->
+    <div>
+        <div class="model-list">
+            <div th:each="model:${models}" class="model-item">
                 <div>
-                    <select th:field="*{searchType}">
-                        <option value="ALL">전체</option>
-                        <option value="GENRE">장르별</option>
-                        <option value="COUNT">조회수별</option>
-                    </select>
+                    <img th:src="@{$model.imageUrl}" alt="광해">
                 </div>
-            </td>
-        </tr>
-    </table>
-    <button type="submit">검색</button>
-</form>
-    <table>
-        <thead>
-        <tr>
-            <th>이름</th>
-            <th>카테고리</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${items}">
-            <td th:text="${item.name}">모델 이름</td>
-            <td th:text="${item.category}">카테고리</td>
-        </tr>
-        </tbody>
-    </table>
-<form name="createForm" method="post" th:action="@{/model/create}">
-    <table>
-        <tr>
-            <th>장르별</th>
-            <td><button type="submit">장르별 모델</button> </td>
-        </tr>
-        <tr>
-            <th>감정별</th>
-            <td><button type="submit">감정별 모델</button> </td>
-        </tr>
-        <tr>
-            <th>베스트 모델</th>
-            <td><button type="submit">베스트 모델</button> </td>
-        </tr>
-    </table>
-</form>
+                <div class="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 장르 및 감정 선택 폼 -->
+    <form name="category" method="post" th:action="@{/model/create}">
+        <div class="category">
+            <div><a th:href="@{/model}">모델 전체 보기</a></div>
+
+            <div class="category-title" onclick="toggleDropdown('genreList')">장르별 ▼</div>
+            <ul id="genreList" style="display:none;">
+                <li><a th:href="@{/model(genre='NORI')}">느와르</a></li>
+                <li><a th:href="@{/model(genre= 'ROMANCE')}">로맨스</a></li>
+                <li><a th:href="@{/model(genre= 'HISTORY')}">사극</a></li>
+            </ul>
+        </div>
+
+        <div class="category-title" onclick="toggleDropdown('emotionList')">감정별</div>
+        <ul id="emotionList">
+
+                <li><a th:href="@{/model(emotion='delight')}">기쁨</a></li>
+                <li><a th:href="@{/model(emotion='sorrow')}">슬픔</a></li>
+                <li><a th:href="@{/model(emotion='melancholy')}">우울</a></li>
+        </ul>
+        <div class="category-title" onclick="togglDropdown('emotionList')">베스트 모델▼</div>
+        <ul id="bestList">
+            <ul>
+                <li></li>
+            </ul>
+        </ul>
+    </form>
 </section>
+<script th:src="@{/js/script.js}"></script>
 </body>
+
 </html>

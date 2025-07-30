@@ -74,6 +74,12 @@ springdoc:
   paths-to-match:
     - /api/**
 
+python:
+  path:
+    base: ${python.base}
+    chatbot: ${python.chatbot}
+
+
 # 소셜 로그인 API 설정
 social:
   kakao.apikey: ${kakao.apikey}
@@ -82,6 +88,10 @@ social:
 
 chatbot:
   api.url: ${chatbot.url}
+
+
+
+
 python:
   path:
     base: ${python.base}

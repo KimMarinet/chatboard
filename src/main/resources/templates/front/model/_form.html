@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="common" th:object="${requestModel}">
+<th:block th:fragment="common" th:object="${requestProduct}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-    <h2>모델 기본정보</h2>
+    <h2>상품 기본정보</h2>
     <table class="table-cols mb30">
         <tr>
-            <th width="120">모델명</th>
+            <th width="120">모델 명</th>
             <td>
                 <input type="text" name="name" th:field="*{name}">
                 <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
             </td>
         </tr>
         <tr>
-            <th>모델분류</th>
+            <th>모델 분류</th>
             <td>
                 <input type="text" name="category" th:field="*{category}">
                 <div class="error" th:each="err : ${#fields.errors('category')}" th:text="${err}"></div>
             </td>
         </tr>
         <tr>
-            <th>모델상태</th>
+            <th>모델 상태</th>
             <td>
                 <span th:each="status : ${statusList}">
-                    <input type="radio" name="modelStatus" th:id="${'status-' + status.name()}" th:value="${status.name()}" th:field="*{modelStatus}">
-                    <label th:for="${'status-' + status.name()}" th:text="${#messages.msg('modelStatus.' + status.name())}"></label>
+                    <input type="radio" name="status" th:id="${'status-' + status.name()}" th:value="${status.name()}" th:field="*{status}">
+                    <label th:for="${'status-' + status.name()}" th:text="${#messages.msg('productStatus.' + status.name())}"></label>
                 </span>
             </td>
         </tr>
     </table>
 
-    <h2>모델 이미지</h2>
     <h2>상품 이미지</h2>
     <table class="table-cols mb30">
         <tr>
@@ -62,11 +61,21 @@
     <h2>모델  상세설명</h2>
     <table class="table-cols mb30">
         <tr>
+            <th width="120">모델 설명</th>
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>
+
+                <div class="uploaded_images" id="editor-images">
+                    <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="*{'file-' + seq}">
+                        <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+                        <i class="xi-upload insert-editor" th:data-file-url="*{fileUrl}"></i>
+                        <i class="xi-close remove" th:data-seq="*{seq}"></i>
+                    </span>
+                </div>
             </td>
         </tr>
     </table>
     <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
 </th:block>
 </html>
