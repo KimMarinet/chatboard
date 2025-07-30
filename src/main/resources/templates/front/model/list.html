@@ -1,94 +1,95 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{front/layouts/index}">
-<head>
-    <title></title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-<section layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          layout:decorate="~{front/layouts/index}">
+    <head>
+        <title></title>
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+    <section layout:fragment="content">
+        <h1 th:text="${pageTitle}"></h1>
 
-    <!-- 검색 폼 -->
-    <form th:action="@{/model/search}" method="get" th:object="${search}">
-        <table>
-            <tr>
-                <td>
-                    <select name="searchType" th:field="*{searchType}">
-                        <option value="ALL">전체</option>
-                        <option value="NAME">이름</option>
-                        <option value="COUNT">조회수</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" name="keyword" th:field="*{keyword}" placeholder="검색어를 입력하세요">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="submit">검색</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+        <!-- 검색 폼 -->
+        <form th:action="@{/model/search}" method="get" th:object="${search}">
+            <table>
+                <tr>
+                    <td>
+                        <select name="searchType" th:field="*{searchType}">
+                            <option value="ALL">전체</option>
+                            <option value="NAME">이름</option>
+                            <option value="COUNT">조회수</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="keyword" th:field="*{keyword}" placeholder="검색어를 입력하세요">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">검색</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
-    <!--모델 목록 -->
-    <!-- 이미지 링크  -->
-    <div th:each="model : ${models}" class="model-item">
-        <div>
-            <img th:src="${model.imageUrl}" alt="장르별">
+        <!--모델 목록 -->
+        <!-- 이미지 링크  -->
+        <h2>모델 이미지</h2>
+        <div th:each="model : ${models}" class="model-item">
+            <div>
+                <img th:src="${model.imageUrl}" alt="장르별 ">
+            </div>
+            <div>
+                <p>
+                    <a th:href="@{chatroom/{modelName}(modelName=${model.Name})}" th:text="${model.name}"></a>광해
+                </p>
+                <p th:text="${model.explanation}">설명</p>
+
+                <p>
+                    <a th:href="@{/chatroom/{modelName}(modelName=${model.name})}" th:text="${model.name}">너의 결혼식
+                    </a>
+
+                <p th:text="${model.explanation}">설명</p>
+
+                <p>
+                   <a th:href="@{chatroom/{modelName}(modelName=${model.Name})} " th:text="${model.name}"></a>범죄와 전쟁
+                </p>
+                <p th:text="${model.explanation}">설명</p>
+            </div>
         </div>
-        <div>
-            <p>
-                <a th:href="@{chatroom/{modelName}(modelName=${model.Name})}" th:text="${model.name}"></a>광해
-            </p>
-            <p th:text="${model.explanation}">설명</p>
-
-            <p>
-                <a th:href="@{/chatroom/{modelName}(modelName=${model.name})}" th:text="${model.name}">너의 결혼식
-                </a>
-
-            <p th:text="${model.explanation}">설명</p>
-
-            <p>
-               <a th:href="@{chatroom/{modelName}(modelName=${model.Name})} " th:text="${model.name}"></a>범죄와 전쟁
-            </p>
-            <p th:text="${model.explanation}">설명</p>
-        </div>
-    </div>
 
 
-    <!-- 장르 및 감정 선택 폼 -->
-    <form name="category" method="post" th:action="@{/model/create}">
-        <div class="category">
-            <div><a th:href="@{/model}">모델 전체 보기</a></div>
+        <!-- 장르 및 감정 선택 폼 -->
+        <form name="category" method="post" th:action="@{/model/create}">
+            <div class="category">
+                <div><a th:href="@{/model}">모델 전체 보기</a></div>
 
-            <div class="category-title" onclick="toggleDropdown('genreList')">장르별 ▼</div>
-            <ul id="genreList" style="display:none;">
-                <li><a th:href="@{/model(genre='NORI')}">느와르</a></li>
-                <li><a th:href="@{/model(genre= 'ROMANCE')}">로맨스</a></li>
-                <li><a th:href="@{/model(genre= 'HISTORY')}">사극</a></li>
+                <div class="category-title" onclick="toggleDropdown('genreList')">장르별 ▼</div>
+                <ul id="genreList" style="display:none;">
+                    <li><a th:href="@{/model(genre='NORI')}">느와르</a></li>
+                    <li><a th:href="@{/model(genre= 'ROMANCE')}">로맨스</a></li>
+                    <li><a th:href="@{/model(genre= 'HISTORY')}">사극</a></li>
+                </ul>
+            </div>
+
+            <div class="category-title" onclick="toggleDropdown('emotionList')">감정별</div>
+            <ul id="emotionList">
+
+                    <li><a th:href="@{/model(emotion='delight')}">기쁨</a></li>
+                    <li><a th:href="@{/model(emotion='sorrow')}">슬픔</a></li>
+                    <li><a th:href="@{/model(emotion='melancholy')}">우울</a></li>
             </ul>
-        </div>
+            <div class="category-title" onclick="toggleDropdown('emotionList')">베스트 모델▼</div>
+            <ul id="bestList">
+                <li></li>
+            </ul>
 
-        <div class="category-title" onclick="toggleDropdown('emotionList')">감정별</div>
-        <ul id="emotionList">
+        </form>
+    </section>
+    <script th:src="@{/js/script.js}"></script>
+    </body>
 
-                <li><a th:href="@{/model(emotion='delight')}">기쁨</a></li>
-                <li><a th:href="@{/model(emotion='sorrow')}">슬픔</a></li>
-                <li><a th:href="@{/model(emotion='melancholy')}">우울</a></li>
-        </ul>
-        <div class="category-title" onclick="toggleDropdown('emotionList')">베스트 모델▼</div>
-        <ul id="bestList">
-            <li></li>
-        </ul>
-
-    </form>
-</section>
-<script th:src="@{/js/script.js}"></script>
-</body>
-
-</html>
+    </html>
