@@ -1,121 +1,31 @@
 <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org"
-          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-          layout:decorate="~{/admin/layouts/index}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/index}">
+
 <head>
     <th:block layout:fragment="addCommonScript">
         <th:block th:replace="~{common/_editor_script::script}"></th:block>
     </th:block>
 </head>
+
 <body>
+
 <section layout:fragment="content">
-
-    <h1 th:text="${pageTitle}">상품 등록</h1>
-
-    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
-
-        <!-- 공통 폼 프래그먼트 호출 예시 (있으면 사용) -->
-
     <h1 th:text="${pageTitle}"></h1>
 
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" autocomplete="off" th:object="${requestModel}" enctype="multipart/form-data">
         <input type="hidden" name="gid" th:field="*{gid}">
         <input type="hidden" name="mode" value="register">
-    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">
 
-        <th:block th:replace="~{/model/_form::common}"></th:block>
-
-        <table>
-            <tr>
-                <th>상품 이름</th>
-                <td>
-
-                    <input type="text" th:field="*{name}" />
-
-                    <input type="text" th:field="*{name}" name="name" />
-
-                    <div class="error" th:each="error : ${#fields.errors('name')}" th:text="${error}"></div>
-                </td>
-            </tr>
-            <tr>
-                <th>분류</th>
-                <td>
-
-                    <input type="text" th:field="*{category}" />
-
-                    <input type="text" th:field="*{category}" name="category" />
-
-                    <div class="error" th:each="error : ${#fields.errors('category')}" th:text="${error}"></div>
-                </td>
-            </tr>
-        </table>
-
-        <h2>상품 이미지</h2>
-        <table>
-            <tr>
-                <th>메인 이미지</th>
-                <td>
-                    <div class="uploaded" id="main_images">
-
-                        <div th:if="*{mainImages != null}">
-                            <div th:each="item : *{mainImages}" class="file-images" th:id="'file-' + ${item.seq}">
-                                <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                                <img th:src="@{/file/thumb(seq=${item.seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="${item.seq}" />
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="sbtn file-upload-btn" th:data-mid="*{mid}" data-location="main" data-image-only="true">이미지 추가</button>
-
-                        <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="'file-' + ${item.seq}">
-                            <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                            <img th:src="@{/file/thumb(seq=${item.seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="${item.seq}" />
-                        </div>
-                    </div>
-                    <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="main" data-image-only="true">이미지 추가</button>
-                </td>
-            </tr>
-            <tr>
-                <th>목록 이미지</th>
-                <td>
-                    <div class="uploaded_images" id="list-images">
-                        <div th:if="*{listImages != null}" th:each="item : *{listImages}" th:object="${item}" class="file-images" th:id="'file-' + ${item.seq}">
-                            <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                            <img th:src="@{/file/thumb(seq=${item.seq},width=200,height=200,crop=true)}" class="image show-image" th:data-seq="${item.seq}" />
-                        </div>
-                    </div>
-                    <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="list" data-single="true" data-image-only="true">이미지 등록</button>
-
-                </td>
-            </tr>
-        </table>
-
-        <table>
-            <tr>
-                <th width="120">상품설명</th>
-                <td>
-                    <textarea id="description" name="description" th:field="*{description}"></textarea>
-                    <div class="uploaded_images" id="editor-images">
-                            <span th:if="*{editorImages != null}" th:each="item : *{editorImages}" th:object="${item}" class="file-items" th:id="'file-' + ${item.seq}">
-                                <a th:href="@{/file/download/{seq}(seq=${item.seq})}" th:text="${item.fileName}"></a>
-                                <i class="xi-upload insert-editor" th:data-file-url="${item.fileUrl}"></i>
-                                <i class="xi-close remove" th:data-seq="${item.seq}"></i>
-                            </span>
-
-                    </div>
-                </td>
-            </tr>
-        </table>
-
+        <th:block th:replace="~{admin/model/_form::common}"></th:block>
 
         <div class="button-group">
             <button type="reset" class="btn">다시입력</button>
             <button type="submit" class="btn black">등록하기</button>
-            <button type="submit" class="btn btn-primary">저장</button>
         </div>
     </form>
-
-
 </section>
 </body>
-</html>
 
+</html>
