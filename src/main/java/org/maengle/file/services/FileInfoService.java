@@ -112,4 +112,11 @@ public class FileInfoService {
         return String.format("%s/%s/%s", fileProperties.getPath(), folder(item), item.getSeq()+ Objects.requireNonNullElse(item.getExtension(),""));
     }
 
+    public List<FileInfo> getListDone(String gid) {
+        return getList(gid, null);
+    }
+
+    public List<FileInfo> getListDone(String gid, String location) {
+        return getList(gid, location);
+    }
 }

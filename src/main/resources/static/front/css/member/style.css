@@ -1,4 +1,7 @@
 /* ---------- 회원 가입 페이지 ---------- S */
+body{
+    overflow: hidden;
+}
 
 .join-title {
   margin-bottom: 25px;
@@ -106,7 +109,7 @@ input#terms-agree {
 }
 
 .login-template{
-    margin: 25px 0px;
+    margin: 15px 0px;
     display: flex;
     justify-content: center;
     align-items: center;

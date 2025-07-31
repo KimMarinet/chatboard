@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <footer th:fragment="common">
-        <h2 class="footer-title"><img th:src= "@{/common/images/logo.png}" class="footer-logo"> 맹글맹글</h2>
+<footer th:fragment="common" class="layout-width">
+    <div class="inner">
+        <h3>맹글맹글</h3>
+        <div class="contact-info">
+            <p>대표 이사: 이소민 || Tel. 010-0000-0000</p>
+            <p>E-mail. testPlayer01@test.org</p>
+        </div>
 
-    <div class="contact-info">
-        <p>대표 이사: 이소민 || Tel. 010-0000-0000</p>
-        <p>E-mail. testPlayer01@test.org</p>
-    </div>
+        <div class="terms">
+            “본 사이트는 인공지능 기술을 활용하며, 이용자는 이에 따른 결과 및 정보 제공 방식에 동의합니다.”
+        </div>
 
-    <div class="terms">
-        “본 사이트는 인공지능 기술을 활용하며, 이용자는 이에 따른 결과 및 정보 제공 방식에 동의합니다.”
-    </div>
-
-    <div class="copyright">
-        © AI와 함께하는 이야기 맹글맹글. All rights reserved.
+        <div class="copyright">
+            © AI와 함께하는 이야기 맹글맹글. All rights reserved.
+        </div>
     </div>
 </footer>
 </html>

@@ -64,6 +64,10 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             if (!password.equals(confirmPassword)) {
                 errors.rejectValue("confirmPassword", "Mismatch");
             }
+
+            if(repository.existsByEmail(form.getEmail())){
+                errors.rejectValue("email", "Duplicated");
+            }
         }
 
         String mobile = form.getMobile();

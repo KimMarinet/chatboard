@@ -2,6 +2,8 @@ package org.maengle.global.libs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.maengle.banner.entities.Banner;
+import org.maengle.banner.service.BannerInfoService;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
 import org.springframework.context.MessageSource;
@@ -26,6 +28,7 @@ public class Utils {
     private final FileInfoService infoService;
     private final LocaleResolver localeResolver;
     private final MessageSource messageSource;
+    private final BannerInfoService bannerInfoService;
 
 
     public int version() {
@@ -152,4 +155,16 @@ public class Utils {
         return request.getParameter(name);
     }
 
+    // 배너 목록
+    public List<Banner> getBanners(String groupCode) {
+        return bannerInfoService.getList(groupCode);
+    }
+
+    /*
+    * 배너 페이지 설정
+    * 0 이하 정수인 경우 1이상 정수로 대체
+    */
+    public static int onlyPositiveNumber(int num, int replace) {
+        return num < 1 ? replace : num;
+    }
 }

@@ -13,6 +13,7 @@ import org.maengle.member.social.constants.SocialType;
 import org.maengle.member.social.services.KakaoLoginService;
 import org.maengle.member.social.services.NaverLoginService;
 import org.maengle.member.validators.JoinValidator;
+import org.maengle.member.validators.LoginValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -34,6 +35,7 @@ public class MemberController {
     private final Utils utils;
     private final JoinService joinService;
     private final JoinValidator joinValidator;
+    private final LoginValidator loginValidator;
     private final FileInfoService fileInfoService;
     private final KakaoLoginService kakaoLoginService;
     private final NaverLoginService naverLoginService;
@@ -91,20 +93,7 @@ public class MemberController {
     public String login(@ModelAttribute RequestLogin form, Errors errors, Model model, SessionStatus sessionStatus){
         commonProcess("login", model);
 
-        /* 검증 실패 처리 S */
-        List<String> fieldErrors = form.getFieldErrors();
-        if (fieldErrors != null) {
-            fieldErrors.forEach(s -> {
-                // 0 - 필드, 1 - 에러코드
-                String[] value = s.split("_");
-                errors.rejectValue(value[0], value[1]);
-            });
-        }
-        List<String> globalErrors = form.getGlobalErrors();
-        if (globalErrors != null) {
-            globalErrors.forEach(errors::reject);
-        }
-        /* 검증 실패 처리 E */
+        loginValidator.validate(form, errors);
 
         model.addAttribute("kakaoLoginUrl", kakaoLoginService.getLoginUrl(form.getRedirectUrl()));
         model.addAttribute("naverLoginUrl", naverLoginService.getLoginUrl(form.getRedirectUrl()));

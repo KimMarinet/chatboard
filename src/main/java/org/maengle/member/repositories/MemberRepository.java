@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, String>, QuerydslPredicateExecutor<Member> {
     Optional<Member> findByUserId(String userId);
     boolean existsByUserId(String userId);
+    boolean existsByEmail(String email);
 
     boolean existsBySocialTypeAndSocialToken(SocialType type, String token);
     Member findBySocialTypeAndSocialToken(SocialType type, String token);
