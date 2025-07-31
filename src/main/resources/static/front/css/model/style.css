@@ -1,37 +1,62 @@
-<style>
-/* 제목 영역 이벤트 */
-    .category-title {
-        cursor: pointer; // 마우스 이벤트
-        font-weight: bold; // 글씨 굵기
-        margin: 10px 0; // 테두리
-        padding: 8px 12px;
-        background-color: #f2f2f2;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        transition: background-color 0.2s;
-        user-select: none;
-    }
-    .category-title:hover {
-        background-color: #e6e6e6;
-    }
-    .ul{
-        list-style: none;
-        padding-left: 15px;
-        margin: 0;
-        display: none;
-    }
-    .ul il {
-        margin: 6px  0;
-    }
+form table {
+  width: 100%;
+  max-width: 400px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
 
-    ul il a {
-        test-decoration: none;
-        color: #333;
-    }
+form td {
+  padding: 8px;
+}
 
-    ul li a: hover {
-        test-decoration underline;
-        color: #007acc;
+select, input[type="text"], button {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 
-    }
-</style>
+}
+
+button {
+  background-color: #4CAF50;S
+  color: white;
+  border: none;
+  cursor: pointer;
+  test-alian : right:
+}
+
+button:hover {
+  background-color: #45a049;
+}
+.category-title {
+
+    cursor: pointer;
+    font-weight: bold;
+    margin: 8px 0 4px;
+    user-select: none;
+}
+
+.category-title-hover {
+    color: #007BFF;
+}
+
+#genreList, #emotionList , #bastList {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: none;
+}
+
+#genreList li , #emotionList li , #bastList li {
+
+    padding: 4px 0;
+}
+
+#genreList li a:hover , #emotionList ii a:hover {
+    test-decoration: underline;
+    color: #007BFF;
+}
+

@@ -45,11 +45,15 @@ public class ModelUpdateController extends CommonController {
 		return ModelStatus.values();
 	}
 
-	// 상품 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
+	// 모델 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
+	// import org.springframework.ui.Model; controller와 html 연결해주는 역할
 	@GetMapping({"", "/list"})
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
 
+		/** import org.springframework.ui.Model; 이게 있는데 도메인 이름이 Model이라서
+		 *  org.maengle.model.entities.Model 이렇게 뜨는것 같습니다.
+		 */
 		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
@@ -57,7 +61,7 @@ public class ModelUpdateController extends CommonController {
 		return "admin/model/list";
 	}
 
-	// 목록에서 상품 정보 수정과 삭제
+	// 목록에서 일괄 수정/ 삭제
 	@RequestMapping(method = {RequestMethod.PATCH, RequestMethod.DELETE})
 	public String listPs(@RequestParam(name="idx", required = false) List<Integer> idxes, Model model) {
 

@@ -22,6 +22,52 @@ window.addEventListener("DOMContentLoaded", function() {
     const log = `선택된 값은 ${value} 입니다`;
     document.querySelect('.log').innerHTML = log;
 
+    }
+
+    // 모델 아이템 클릭 이벤트 (이름 이미지 클릭시 출력)
+    const modeItem = document.querySelectAll('.model-item');
+
+    modeItem.forEach(function(item)){
+
+        // 이미지 클릭 이벤트
+        const img = item.querySelector('img');
+
+        if(img){
+            img.addEventListener('click' , function(){
+
+            const modeItem = item.querySelector('a').textContent.trim();
+            console.log('이미지 클릭', modeName)
+            });
+        }
+
+
+    const link = item.querySelector('a');
+    if(link){
+        link.addEventListener('click', function(){
+            const modelName = item.textContent.trim();
+            console.log('이름 클릭', modelName)l
+        });
+    }
+
 
     }
+// 검색 빈 문자 열 공백 제거
+document.addEventListener('DOMContent', function(){
+
+    const i  = document.getElementById('search');
+    const key = i.querySelector('input[keyword]');
+    const
+
+
+
+
+
+})
+
+
+
+
+
+
+
 </script>

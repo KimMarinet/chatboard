@@ -4,6 +4,7 @@ server:
     session.cookie.name: 66e56riA66e56riA
 
 spring:
+
   # 레디스 연동
   data:
     redis:
@@ -73,10 +74,7 @@ springdoc:
   paths-to-match:
     - /api/**
 
-python:
-  path:
-    base: ${python.base}
-    chatbot: ${python.chatbot}
+
 
 
 # 소셜 로그인 API 설정
@@ -87,6 +85,14 @@ social:
 
 chatbot:
   api.url: ${chatbot.url}
+
+
+
+
+python:
+  path:
+    base: ${python.base}
+    chatbot: ${python.chatbot}
 
 
 
