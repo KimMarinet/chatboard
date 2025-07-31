@@ -77,14 +77,14 @@ commonLib.modal = {
         modalContent.style.top = `${ypos}px`;
         modalContent.style.left = `${xpos}px`;
 
-        // 팝업 제목 처리
-        if (_title) {
-            const titleDiv = document.createElement("img");
-            titleDiv.className = "modal-title";
-            titleDiv.src = "common/images/logo.png"
-            titleDiv.innerHTML = _title;
-            modalContent.prepend(titleDiv);
-        }
+        // 팝업 상단 이미지  처리
+        const titleDiv = document.createElement("img");
+        titleDiv.className = "modal-title";
+
+        titleDiv.src = commonLib.getUrl("/common/images/logo.png");
+
+        modalContent.prepend(titleDiv);
+
     },
     /**
     * close 정의
@@ -128,7 +128,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 /**
-iframe으로 로딩된 컨텐츠 높이에 따른 모달창 사이즈 조정
+* iframe으로 로딩된 컨텐츠 높이 따른 모달창 사이즈 조정
+*
 */
 function resizeModalHeight(height) {
     height = Math.ceil(height);
@@ -139,9 +140,8 @@ function resizeModalHeight(height) {
     const iframeEl = modalContent.querySelector("iframe");
     iframeEl.height = height;
 
-    modalContent.height
-
     modalContent.style.height = modalHeight + "px";
-    modalContent.style.top = ypos + "px"
+    modalContent.style.top = ypos + "px";
+
 
 }

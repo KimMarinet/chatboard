@@ -91,6 +91,7 @@ public class MemberUpdateService {
 
 
     // 회원정보 수정 처리
+    // 일단 구성만 한 상태, 강사님이 진행 시작하실 부분
     public void process(RequestProfile form) {
         Member member = memberUtil.getMember();
         member.setName(form.getName());
@@ -115,15 +116,5 @@ public class MemberUpdateService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         session.setAttribute("loggedMember", userDetails.getMember());
-    }
-
-    // 개인 회원 탈퇴 처리
-    public void resign() {
-        Member member = memberUtil.getMember();
-        member.setDeletedAt(LocalDateTime.now());
-        repository.saveAndFlush(member);
-
-        // 로그아웃 처리 or 세션 무효화
-        session.invalidate();
     }
 }

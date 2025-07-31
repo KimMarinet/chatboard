@@ -6,7 +6,6 @@
 <head>
     <title th:text="${pageTitle}">모델 목록</title>
 </head>
-
 <body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
@@ -17,12 +16,12 @@
                 <th width="150">키워드 검색</th>
                 <td>
                     <div class="flex">
-                        <select th:field="*{searchType}" class="w180 mr5">
-                            <option value="all">통합검색</option>
-                            <option value="name">모델명</option>
-                            <option value="category">모델 분류</option>
-                        </select>
-                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드를 입력" />
+                        <select  th:field="*{searchType}" class="w180 mr5">
+                            <option value="ALL">통합검색</option>
+                            <option value="NAME">이름</option>
+                            <option value="COUNT">조회수</option>
+                        </select><x></x>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드를 입력">
                     </div>
                 </td>
             </tr>
@@ -36,47 +35,14 @@
         <table class="table-rows">
             <thead>
             <tr>
-                <th width="40">
-                    <input type="checkbox" class="check-all" data-target-name="chk" id="check-all">
-                    <label for="check-all" class="standalone"></label>
-                </th>
-                <th width="180">카테고리</th>
-                <th>모델 전체 보기</th>
-                <th width="350"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                <td align="center">
-                    <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
-                    <label th:for="${'chk-' + status.index}" class="standalone"></label>
-                    <input type="hidden" th:name="${'mid_' + status.index}" th:value="*{mid}">
-                </td>
-                <td th:text="*{mid}" align="center"></td>
-                <td>
-                    <input type="text" th:name="${'name_' + status.index}" th:value="*{name}">
-                </td>
-                <td>
-                    <a th:href="@{/admin/board/update/{mid}(mid=*{mid})}" class="sbtn">리스트 수정</a>
-                    <a th:href="@{/board/list/{mid}(mid=*{mid})}" class="sbtn black" target="_blank">미리보기</a>
-                </td>
-            </tr>
-            </tbody>
-
-    <h2>모델 목록</h2>
-    <form name="modeList" method="POST" th:action="@{/admin/model}" target="ifrmProcess" autocomplete="off">
-        <input type="hidden" name="_method" value="PATCH">
-        <table class="table-rows">
-            <thead>
-            <tr>
                 <th width="100">이미지</th>
                 <th width="40">
                     <input type="checkbox" class="check-all" data-target-name="chk" id="check-all">
                     <label for="check-all" class="standalone"></label>
                 </th>
-                <th width="150">모델 분류</th>
-                <th width="150">모델명</th>
-                <th width="400">모델 설명</th>
+                <th width="150">카테고리</th>
+                <th width="150">모델</th>
+                <th width="400">설명</th>
             </tr>
             </thead>
             <tbody>
@@ -88,15 +54,22 @@
                     <span th:if="${item.mainImages == null || item.mainImages.isEmpty()}">이미지 없음</span>
                 </td>
 
+                <!-- 체크박스 -->
                 <td align="center">
                     <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
                     <label th:for="${'chk-' + status.index}" class="standalone"></label>
                     <input type="hidden" th:name="${'gid_' + status.index}" th:value="*{gid}">
                 </td>
+
+                <!-- 카테고리 -->
                 <td th:text="*{category}" align="center"></td>
+
+                <!-- 모델 이름 -->
                 <td>
                     <input type="text" th:name="${'name_' + status.index}" th:value="*{name}">
                 </td>
+
+                <!-- ✅ 설명: 오른쪽에 출력 -->
                 <td th:text="*{description}">설명 없음</td>
             </tr>
             </tbody>

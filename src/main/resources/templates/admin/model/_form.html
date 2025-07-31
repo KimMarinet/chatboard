@@ -13,19 +13,38 @@
             </td>
         </tr>
         <tr>
-            <th>모델분류</th>
+            <th>대분류</th>
             <td>
                 <input type="text" name="category" th:field="*{category}">
                 <div class="error" th:each="err : ${#fields.errors('category')}" th:text="${err}"></div>
             </td>
         </tr>
         <tr>
+            <th>하위분류</th>
+            <td>
+                <input type="text" name="subCategory" th:field="*{subCategory}">
+            </td>
+        </tr>
+        <tr>
             <th>모델상태</th>
             <td>
-                <span th:each="status : ${statusList}">
-                    <input type="radio" name="modelStatus" th:id="${'status-' + status.name()}" th:value="${status.name()}" th:field="*{modelStatus}">
-                    <label th:for="${'status-' + status.name()}" th:text="${#messages.msg('modelStatus.' + status.name())}"></label>
+                <span>
+                    <input type="radio" name="modelStatus" id="model-status-ready" value="READY" th:field="*{modelStatus}">
+                    <label for="model-status-ready">준비중</label>
                 </span>
+
+                <span>
+                    <input type="radio" name="modelStatus" id="model-status-active" value="ACTIVE" th:field="*{modelStatus}">
+                    <label for="model-status-active">사용중</label>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>챗봇모델</th>
+            <td>
+                <select name="chatbotModel" th:field="*{chatbotModel}">
+                    <option th:each="item : ${chatbotModels}" th:value="${item.name()}" th:text="${item.title}"></option>
+                </select>
             </td>
         </tr>
     </table>
@@ -35,41 +54,21 @@
         <tr>
             <th width="120">메인 이미지</th>
             <td>
-                <div class="uploaded_images" id="main-images">
-                    <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="*{'file-' + seq}">
-                        <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                        <img th:src="@{/file/thumb?seq={seq}&width=200&height=200&crop=true(seq=*{seq})}" class="image show-image" th:data-seq="*{seq}">
-                <input type="file" name="mainFiles" multiple>
-
-                <div class="uploaded_images" id="main-images" th:classappend="*{mainImages != null} ? 'uploaded'">
-                    <div class="inner">
-                        <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="*{'file-' + mainImages.seq}">
-                            <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                            <img th:src="@{/file/thumb?seq={seq}&width=200&height=200&crop=true(seq=*{seq})}" class="image show-image" th:data-seq="*{mainImages.seq}">
-                        </div>
+                <div class="main-image">
+                    <div th:if="*{mainImage != null}" class="file-images" th:id="*{'file-' + mainImage.seq}">
+                        <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{mainImage.seq})}" class="image show-image" th:data-seq="*{mainImage.seq}">
+                        <button type="button" class="remove" th:data-seq="*{mainImage.seq}">삭제</button>
                     </div>
                 </div>
-                <button type='button' class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="main" data-image-only="true">이미지 추가</button>
-            </td>
-        </tr>
-        <tr>
-            <th>목록 이미지</th>
-            <td>
-                <div class="uploaded_images" id="list-images">
-                    <div th:if="*{listImages != null}" th:each="item : *{listImages}" th:object="${item}" class="file-images" th:id="*{'file-' + seq}">
-                        <i class="xi-close remove" th:data-seq="*{seq}"></i>
-                        <img th:src="@{/file/thumb?seq={seq}&width=200&height=200&crop=true(seq=*{seq})}" class="image show-image" th:data-seq="*{seq}">
-                    </div>
-                </div>
-                <button type="button" class="sbtn file-upload-btn" th:data-gid="*{gid}" data-location="list" data-single="true" data-image-only="true">이미지 등록</button>
+                <button type="button" th:text="#{이미지_선택}" class="file-upload-btn sbtn" th:data-gid="*{gid}" data-location='main' data-single="true" data-image-only="true"></button>
             </td>
         </tr>
     </table>
 
-    <h2>모델  상세설명</h2>
+    <h2>모델 상세설명</h2>
     <table class="table-cols mb30">
         <tr>
-            <th width="120">모델설명</th>
+            <th width="120">상품설명</th>
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>
             </td>

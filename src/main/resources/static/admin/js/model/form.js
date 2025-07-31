@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function() {
-    const el = document.querySelector(".uploaded_images .remove");
+    const el = document.querySelector(".file-images .remove");
     if (el) {
         el.addEventListener("click", function() {
             if (!confirm('정말 삭제하겠습니까?')) {
@@ -22,7 +22,7 @@ function fileUploadCallback(items) {
 
     const { seq } = items[0];
     let html = document.getElementById("image-tpl").innerHTML;
-    const targetEl = document.querySelector(".uploaded_images .inner");
+    const targetEl = document.querySelector(".main-image");
     const imageUrl = commonLib.getUrl(`/file/thumb?seq=${seq}&width=250&height=250&crop=true`);
     html = html.replace(/\[seq\]/g, seq)
                 .replace(/\[imageUrl\]/g, imageUrl);
@@ -32,7 +32,6 @@ function fileUploadCallback(items) {
     const el = dom.querySelector(".file-images");
 
     targetEl.append(el);
-    targetEl.parentElement.classList.add("uploaded")
 
     const removeEl = el.querySelector(".remove");
     const { fileManager } = commonLib;
@@ -48,7 +47,6 @@ function fileUploadCallback(items) {
 *
 */
 function fileDeleteCallback(item) {
-   const targetEl = document.querySelector(".uploaded_images .inner");
+   const targetEl = document.querySelector(".main-image");
    targetEl.innerHTML = "";
-   targetEl.parentElement.classList.remove("uploaded");
 }

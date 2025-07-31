@@ -13,7 +13,6 @@ import org.maengle.global.search.CommonSearch;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +24,9 @@ import java.util.List;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
-@Lazy
 @Service
 @RequiredArgsConstructor
 public class BoardConfigInfoService {
-
 
     private final BoardRepository repository;
     private final ModelMapper mapper;
@@ -87,7 +84,7 @@ public class BoardConfigInfoService {
         List<Board> items = data.getContent();
         items.forEach(this::addInfo); // 추가정보 처리
 
-        int total = (int) data.getTotalElements();
+        int total = (int)data.getTotalElements();
         Pagination pagination = new Pagination(page, total, 10, limit, request);
 
         return new ListData<>(items, pagination);
@@ -98,4 +95,5 @@ public class BoardConfigInfoService {
     private void addInfo(Board item) {
 
     }
+
 }

@@ -3,14 +3,13 @@ package org.maengle.model.services;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.model.controllers.RequestModel;
-import org.maengle.admin.model.controllers.RequestModel;
-import org.maengle.file.services.FileInfoService;
 import org.maengle.file.services.FileUploadService;
 import org.maengle.global.exceptions.script.AlertException;
 import org.maengle.global.libs.Utils;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.entities.Model;
 import org.maengle.model.repositories.ModelRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,44 +20,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModelUpdateService {
     private final ModelRepository modelRepository;
-    private final HttpServletRequest request;
-    private final Utils utils;
-    private final FileInfoService fileInfoService;
     private final FileUploadService fileUploadService;
+    private final HttpServletRequest request;
+    private final ModelMapper mapper;
+    private final Utils utils;
 
     // 모델 등록,수정 화면에서 입력한 값을 requestModel에 담아서 넘겨줌
     public Model process(RequestModel form) {
-        Long seq = form.getSeq(); // seq(모델고유번호)로 구분
+        Model item = mapper.map(form, Model.class);
 
-        // seq 값이 없거나 0보다 작으면 새 모델 객체 생성, 아니면 기존 모델 불러오기
-        Model item = (seq == null || seq < 1L)
-                ? new Model()
-                : modelRepository.findById(seq).orElseGet(Model::new);
+        modelRepository.saveAndFlush(item);
 
-        // 모델 등록일 경우에만 고유 GID 설정
-        if (seq == null || seq.equals("add")) {
-            item.setGid(form.getGid());
-        }
-
+        // 파일 업로드 완료 처리
         fileUploadService.processDone(form.getGid());
-
-        // 공통 정보 저장 (등록/수정 공통 처리)
-        item.setName(form.getName());
-        item.setDescription(form.getDescription());
-        item.setCategory(form.getCategory());
-        item.setModelStatus(form.getModelStatus());
-        item.setListImages(fileInfoService.getList(form.getGid(), "list"));
-        item.setMainImages(fileInfoService.getList(form.getGid(), "main"));
-
-        modelRepository.saveAndFlush(item); // DB에 저장
-
-        fileUploadService.processDone(item.getGid());
-
-        //modelInfoService.processDone(form.getGid());
-        /*
-        * 후처리 예정 (상태 변경 등..)
-        * ModelInfoService와 같이 완성
-        */
 
         return item;
 

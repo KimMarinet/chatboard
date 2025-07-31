@@ -5,10 +5,5 @@
 
 <section layout:fragment="content">
     <h1 class="main-title" th:text="${pageTitle}"></h1>
-
-    <form th:action="@{/mypage/resign}" method="POST" class="resign-form" id="resignForm">
-        <p>정말 회원 탈퇴하시겠습니까?<br>탈퇴 시 계정은 복구되지 않습니다.</p>
-        <button type="button" class="btn-resign" id="personResign">탈퇴하기</button>
-    </form>
 </section>
 </html>

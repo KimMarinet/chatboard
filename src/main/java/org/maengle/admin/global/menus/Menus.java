@@ -22,70 +22,18 @@ public class Menus {
                 new Menu("posts", "게시글 관리", "/admin/board/posts")
         ));
 
-
-
-
-        // 모델 관리
-        menus.put("model" , List.of(
-                new Menu("list", "모델 목록", "/admin/model/list"),
-                new Menu("register" , "모댈 등록" , "admin/model/register"),
-                new Menu("category", "카테고리", "admin/model/category")
-        ));
-
-
-
-
-
-
         // 배너 관리
         menus.put("banner", Arrays.asList(
                 new Menu("group", "배너관리", "/admin/banner"),
                 new Menu("add", "배너등록", "/admin/banner/add")
         ));
 
-
-
-        // 모델 관리
-        menus.put("model" , List.of(
-                new Menu("list", "모델 목록", "/admin/model/list"),
-                new Menu("register" , "모댈 등록" , "admin/model/register"),
-                new Menu("category", "카테고리", "admin/model/category")
-        ));
-
-
-
-
-
         // 모델 관리
         menus.put("model" , List.of(
                 new Menu("list", "모델 목록", "/admin/model/list"),
                 new Menu("register" , "모델 등록" , "/admin/model/register"),
-                new Menu("update", "모델 수정", "/admin/model/update")
+                new Menu("category", "모델 수정", "/admin/model/update")
         ));
-
-
-
-
-        // 모델 관리
-        menus.put("model" , List.of(
-                new Menu("list", "모델 목록", "/admin/model/list"),
-                new Menu("register" , "모댈 등록" , "admin/model/register"),
-                new Menu("category", "카테고리", "admin/model/category")
-        ));
-
-
-
-
-
-
-        // 모델 관리
-        menus.put("model" , List.of(
-                new Menu("list", "모델 목록", "/admin/model/list"),
-                new Menu("register" , "모댈 등록" , "/admin/model/register"),
-                new Menu("category", "카테고리", "/admin/model/category")
-        ));
-
-
 
     }
 
