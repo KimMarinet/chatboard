@@ -1,5 +1,6 @@
 package org.maengle.admin.global.menus;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +36,25 @@ public class Menus {
 
 
 
+
         // 배너 관리
         menus.put("banner", Arrays.asList(
                 new Menu("group", "배너관리", "/admin/banner"),
                 new Menu("add", "배너등록", "/admin/banner/add")
         ));
+
+
+
+        // 모델 관리
+        menus.put("model" , List.of(
+                new Menu("list", "모델 목록", "/admin/model/list"),
+                new Menu("register" , "모댈 등록" , "admin/model/register"),
+                new Menu("category", "카테고리", "admin/model/category")
+        ));
+
+
+
+
 
         // 모델 관리
         menus.put("model" , List.of(
@@ -56,6 +71,18 @@ public class Menus {
                 new Menu("list", "모델 목록", "/admin/model/list"),
                 new Menu("register" , "모댈 등록" , "admin/model/register"),
                 new Menu("category", "카테고리", "admin/model/category")
+        ));
+
+
+
+
+
+
+        // 모델 관리
+        menus.put("model" , List.of(
+                new Menu("list", "모델 목록", "/admin/model/list"),
+                new Menu("register" , "모댈 등록" , "/admin/model/register"),
+                new Menu("category", "카테고리", "/admin/model/category")
         ));
 
 

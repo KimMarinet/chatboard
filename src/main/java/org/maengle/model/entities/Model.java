@@ -29,10 +29,12 @@ public class Model extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ModelStatus modelStatus;
 
-    @Column
+    @Column(length = 60)
     private String category;
 
-    @Column
+    @Column(length = 60)
+    private String subcategory;
+
     private Long count; // 조회수
 
     @Lob
