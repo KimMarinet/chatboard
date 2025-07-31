@@ -18,7 +18,7 @@
 
     <h1 th:text="${pageTitle}"></h1>
 
-    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" autocomplete="off" th:object="${requestModel}">
+    <form name="frmSave" method="POST" th:action="@{/admin/model/register}" autocomplete="off" th:object="${requestModel}" enctype="multipart/form-data">
         <input type="hidden" name="gid" th:field="*{gid}">
         <input type="hidden" name="mode" value="register">
     <form name="frmSave" method="POST" th:action="@{/admin/model/register}" th:object="${requestModel}" autocomplete="off">

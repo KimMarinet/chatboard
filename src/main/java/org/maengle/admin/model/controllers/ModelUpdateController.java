@@ -2,7 +2,9 @@ package org.maengle.admin.model.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
+import org.maengle.file.controllers.RequestUpload;
 import org.maengle.file.services.FileInfoService;
+import org.maengle.file.services.FileUploadService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,6 +30,7 @@ public class ModelUpdateController extends CommonController {
 	private final ModelUpdateService modelUpdateService;
 	private final ModelViewService modelInfoService;
 	private final FileInfoService fileInfoService;
+	private final FileUploadService fileUploadService;
 
 
 	@Override
@@ -95,13 +99,24 @@ public class ModelUpdateController extends CommonController {
 
 	// 모델 등록, 수정 처리
 	@PostMapping("/register")
-	public String saveModel(RequestModel form, Errors errors, Model model) {
+	public String saveModel(RequestModel form, @RequestParam(name = "mainFiles", required = false)MultipartFile[] mainFiles, Errors errors, Model model) {
 		String mode = Objects.requireNonNullElse(form.getMode(), "add");
 		commonProcess(mode.equals("edit") ? "update" : "register", model);
 
 		// gid가 null이면 UUID로 생성
 		if (!StringUtils.hasText(form.getGid())) {
 			form.setGid(UUID.randomUUID().toString());
+		}
+
+		if (mainFiles != null && mainFiles.length > 0) {
+			RequestUpload upload = new RequestUpload();
+			upload.setFiles(mainFiles);
+			upload.setGid(form.getGid());
+			upload.setLocation("main");
+			upload.setSingle(false);
+			upload.setImageOnly(true);
+
+			fileUploadService.uploadProcess(upload);
 		}
 
 		if (errors.hasErrors()) {

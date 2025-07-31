@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -74,18 +75,24 @@ public class ModelViewService {
 		}
 		/* 모델 등록일자 검색 처리 E */
 
-		/* 조회수 검색 처리 S */
-		Integer minCount = search.getMinCount();
-		Integer maxCount = search.getMaxCount();
+		/* 모델 분류 검색 처리 S */
+		String keyword = search.getSkey();
+		String type = search.getSearchType();
 
-		if (minCount != null) {
-			andBuilder.and(model.count.goe(minCount));
-		}
+		if (StringUtils.hasText(search.getSkey())) {
 
-		if (maxCount != null) {
-			andBuilder.and(model.count.loe(maxCount));
+
+			switch (type) {
+				case "name" -> andBuilder.and(model.name.containsIgnoreCase(keyword));
+				case "category" -> andBuilder.and(model.category.containsIgnoreCase(keyword));
+				default -> andBuilder.and(
+						model.name.containsIgnoreCase(keyword)
+								.or(model.category.containsIgnoreCase(keyword))
+				);
+			}
+
 		}
-		/* 조회수 검색 처리 E */
+		/* 모델 분류 검색 처리 E */
 
 		Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 		Page<Model> data = modelRepository.findAll(andBuilder, pageable);

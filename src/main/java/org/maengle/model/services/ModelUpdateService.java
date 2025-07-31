@@ -40,6 +40,8 @@ public class ModelUpdateService {
             item.setGid(form.getGid());
         }
 
+        fileUploadService.processDone(form.getGid());
+
         // 공통 정보 저장 (등록/수정 공통 처리)
         item.setName(form.getName());
         item.setDescription(form.getDescription());
