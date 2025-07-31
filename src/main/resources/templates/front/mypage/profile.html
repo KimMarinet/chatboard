@@ -3,9 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-<section layout:fragment="content">
+<section layout:fragment="content" class="mypage-container">
     <h1 class="main-title" th:text="${pageTitle}"></h1>
-    <form name="frmProfile" method="POST" th:action="@{/mypage/profile}" autocomplete="off" th:object="${requestProfile}">
+    <form name="frmProfile" method="POST" th:action="@{/mypage/profile}" autocomplete="off" th:object="${requestProfile}" class="mypage-form">
         <input type="hidden" name="_method" value="PATCH">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
@@ -18,7 +18,7 @@
         </dl>
         <dl>
             <dt th:text="#{이메일}"></dt>
-            <dd th:text="${loggedMember.email}"></dd>
+            <dd th:text="${loggedMember.email}" class="mypage-email"></dd>
         </dl>
         <dl>
             <dt th:text="#{비밀번호}"></dt>
@@ -55,9 +55,12 @@
             <dt th:text="#{프로필_이미지}"></dt>
             <dd>
                 <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
-                    <div th:text="#{이미지_변경하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
                     <div class="inner">
+                        <div th:if="*{profileImage == null}" class="profile-images">
+                            <div th:text="#{이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
+                        </div>
                         <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                            <div th:text="#{이미지_변경하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
                             <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
                             <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
                         </div>
