@@ -35,6 +35,12 @@ public class Menus {
 
 
 
+        // 배너 관리
+        menus.put("banner", Arrays.asList(
+                new Menu("group", "배너관리", "/admin/banner"),
+                new Menu("add", "배너등록", "/admin/banner/add")
+        ));
+
         // 모델 관리
         menus.put("model" , List.of(
                 new Menu("list", "모델 목록", "/admin/model/list"),

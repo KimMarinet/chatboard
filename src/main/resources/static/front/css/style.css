@@ -46,7 +46,7 @@ h1, h2, h3, h4 {
 h1.main-title {
     font-size: 1.35rem;
     padding-bottom: 15px;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #1F9EFF;
     margin-bottom: 25px;
     font-weight: 600;
 }
@@ -68,8 +68,7 @@ header {
 }
 
 .site-header {
-  background-color: #3399ff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #1A8CDD;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,7 +90,7 @@ header .site-logo {
     margin: 0px;
     font-size: 20px;
     font-weight: bold;
-    color: #2c3e50;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -129,13 +128,13 @@ header #site-main-search input[type='text']{
     background: #f5f5f5;
 }
 
-header .right a, button {
-    color: #787878;
+header .right a, button:not(.btn) {
+    color: #fff;
     font-weight: 600;
     font-size: 14px;
     letter-spacing: -0.01em;
 }
-header .right button {
+header .right button:not(.btn) {
     background: transparent;
     border: 0;
 }
@@ -150,14 +149,17 @@ header nav a {
     font-size: 16px;
     font-weight: 600;
     padding: 0 12px;
+    color: #000;
+    border-radius: 15px;
 }
 
 header nav a:hover {
-    color: #787878;
+    color: #e0e0e0;
 }
 
 header nav a.on {
-    color: #1E9EFF;
+    background-color: #1E9EFF;
+    color: #fff;
 }
 
 header .user-actions {
@@ -170,8 +172,10 @@ header .user-actions {
 header .user-actions > * {
   display: flex;
   align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
 }
-
 
 header .user-actions a {
   margin: 10px 0px;
@@ -182,7 +186,7 @@ header .user-actions a {
 
 header .user-actions .dot {
     color: #e6e6e6;
-    margin: 0 12px;
+    margin: 0 6px;
 }
 
 header .user-actions a:hover {
@@ -203,18 +207,18 @@ header .user-actions a:hover {
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 4px 16px;
   background-color: white;
-  border: 3px solid #0077cc;
-  border-radius: 25px;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
+  font-weight: 600;
 }
 
 .btn:hover {
-  background-color: #f7c855;
-  color: black;
+  background-color: #1A8CDD;
+  color: #fff;
 }
 
 /* ---------- 헤더 영역 E ---------- */
@@ -265,29 +269,23 @@ footer-title {
   color: #aaa;
 }
 
+.inner{
+    padding: 15px 0;
+}
+
 @media (max-width: 600px) {
   .footer {
     font-size: 13px;
     padding: 30px 15px;
   }
 
-  .footer .h2 {
-    font-size: 16px;
-  }
+   .site-header .user-actions .dot {
+        margin: 0 7px;
+   }
 }
 
 /* ---------- 푸터 영역 ---------- E */
 
-/* ---------- 메인 영역 ---------- S */
-
-
-/* ---------- 메인 영역 ---------- E */
-
-/* ------- 마이페이지 영역 ------- S */
-
-
-
-/* ------- 마이페이지 영역 ------- E */
 
 
 /* ---------- 프로필 영역 ---------- S */
@@ -305,3 +303,21 @@ header .profile-image {
 }
 
 /* ---------- 프로필 영역 ---------- E */
+}
+
+/* ---------- 배너 영역 ---------- S */
+
+.banner-slider .swiper-slide img {
+ width: 100%;
+ height: 300px;
+ object-fit: cover;
+}
+
+.banner-slider .swiper-button-next,
+.banner-slider .swiper-button-prev {
+ color: #fff;
+ top: 50%;
+ transform: translateY(-50%);
+}
+
+/* ---------- 배너 영역 ---------- E */

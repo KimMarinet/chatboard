@@ -4,6 +4,42 @@
       layout:decorate="~{front/layouts/index}">
 
     <main layout:fragment="content">
-        <h1>메인 페이지...</h1>
+        <div class="layout-width">
+            <!-- 슬라이드 -->
+            <div class="swiper banners">
+                <div class="swiper-wrapper">
+
+                    <!-- 디버깅용 강제 띄우는 화면 S -->
+                    <div class="swiper-slide">
+                        <img src="/images/download1.jpeg" alt="슬라이드1" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/images/download2.jpeg" alt="슬라이드2" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/images/download3.jpeg" alt="슬라이드3" />
+                    </div>
+                    <!-- 디버깅용 강제 띄우는 화면 E -->
+
+                    <!-- original code S -->
+                    <!--<div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
+                        <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
+                            <img th:src="*{bannerImage.fileUrl}" alt="" />
+                        </a>
+                    </div>-->
+                    <!-- original code E -->
+
+                </div>
+                <!-- 슬라이드 -->
+                <!-- 네비게이션 및 페이지네이션 -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <!-- 네비게이션 및 페이지네이션 -->
+            </div>
+        </div>
+
+        <!-- 실제로 대화하는 창 띄우는 부분 중요!!! -->
+        <button type="button" class="modal-open" data-width="600" data-height="800" data-url="/chat?model=MODEL1" data-title="챗봇 연습" th:text="#{챗봇_대화}"></button>
     </main>
 </html>

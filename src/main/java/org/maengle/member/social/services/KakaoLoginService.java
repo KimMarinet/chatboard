@@ -100,7 +100,7 @@ public class KakaoLoginService implements SocialLoginService{
 
     @Override
     public boolean exists(String token) {
-        return false;
+        return memberRepository.existsBySocialTypeAndSocialToken(SocialType.KAKAO, token);
     }
 
     @Override

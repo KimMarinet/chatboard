@@ -27,6 +27,7 @@ public class EmailVerifyService {
 
         // 세션 속성값에 생성한 인증번호 저장
         session.setAttribute("EmailAuthNum", authNum);
+        System.out.println(session.getAttribute("EmailAuthNum"));
         // 세션 속성값에 현재 시간 값 저장 (인증 시간 제한을 두기 위해)
         session.setAttribute("EmailAuthStart", System.currentTimeMillis());
 
@@ -60,7 +61,7 @@ public class EmailVerifyService {
             }
 
             // 사용자 입력 코드와 발급 코드가 일치하는지 여부 체크
-            boolean isVerified = code == authNum.intValue();
+            boolean isVerified = code == authNum;
             session.setAttribute("EmailAuthVerified", isVerified);
 
             return isVerified;

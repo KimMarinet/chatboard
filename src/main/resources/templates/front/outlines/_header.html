@@ -27,9 +27,9 @@
                 </th:block>
 
                 <th:block th:unless="${isLogin}">
-                    <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn"></a>
+                    <a th:href="@{/member/join?popup=true}" th:text="#{회원가입}" class="btn"></a>
                     <svg width="3" height="3" viewBox="0 0 3 3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="dot"><circle cx="1.5" cy="1.5" r="1.5"></circle></svg>
-                    <button type="button" th:text="#{로그인}" class="btn modal-open" data-width="450" data-height="650" data-url="/member/login" th:data-title="#{맹글 놀이터}"></button>
+                    <button type="button" th:text="#{로그인}" class="btn modal-open" data-width="450" data-height="605" data-url="/member/login" th:data-title="#{맹글 놀이터}"></button>
                 </th:block>
             </div>
         </div>

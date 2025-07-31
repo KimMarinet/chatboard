@@ -23,7 +23,7 @@ public class ChattingService {
     private final ChatDataRepository repository;
     private final MemberUtil memberUtil;
 
-    @Value("${chatbot.api.url")
+    @Value("${chatbot.api.url}")
     private String apiUrl;
 
     public ChatData process(ChatbotModel model, String roomId, String message){

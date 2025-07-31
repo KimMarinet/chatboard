@@ -42,7 +42,24 @@
                 </li>
                 <li>
                     <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+                    <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" class="email_verify" th:text="#{인증코드전송}"></button>
                     <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div class="email_auth_box">
+                        <!-- 인증번호 입력란 -->
+                        <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                            <div class="auth_box1">
+                                <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                                <span id="auth_count">03:00</span>
+                                <button type="button" class="email_verify" id="email_confirm" th:text="#{확인}" disabled></button>
+                            </div>
+                            <button type="button" class="email_verify" id="email_re_verify" th:text="#{재전송}" disabled></button>
+                        </th:block>
+                        <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                            <span class='confirmed' th:text="#{확인된_이메일_입니다}"></span>
+                        </th:block>
+                    </div>
                 </li>
                 <li>
                     <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}">

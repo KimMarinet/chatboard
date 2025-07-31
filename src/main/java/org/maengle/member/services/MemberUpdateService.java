@@ -1,14 +1,23 @@
 package org.maengle.member.services;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.maengle.file.services.FileUploadService;
 import org.maengle.global.exceptions.script.AlertException;
 import org.maengle.global.libs.Utils;
+import org.maengle.member.MemberInfo;
 import org.maengle.member.entities.Member;
+import org.maengle.member.libs.MemberUtil;
 import org.maengle.member.repositories.MemberRepository;
 import org.maengle.mypage.controllers.RequestProfile;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +31,11 @@ public class MemberUpdateService {
     private final Utils utils;
     private final HttpServletRequest request;
     private final MemberRepository repository;
+    private final MemberInfoService memberInfoService;
+    private final MemberUtil memberUtil;
+    private final PasswordEncoder encoder;
+    private final HttpSession session;
+    private final FileUploadService fileUploadService;
 
     // 프로세스 일괄처리임
     public void processBatch(List<Integer> chks) {
@@ -77,8 +91,39 @@ public class MemberUpdateService {
 
 
     // 회원정보 수정 처리
-    // 일단 구성만 한 상태, 강사님이 진행 시작하실 부분
     public void process(RequestProfile form) {
+        Member member = memberUtil.getMember();
+        member.setName(form.getName());
+        member.setGender(form.getGender());
+        member.setMobile(form.getMobile());
 
+        String password = form.getPassword();
+
+        if (StringUtils.hasText(password)) {
+            member.setPassword(encoder.encode(password));
+        }
+
+        repository.saveAndFlush(member);
+
+        // 파일 업로드 완료 처리
+        fileUploadService.processDone(member.getGid());
+
+
+        // 변경된 회원 정보를 세션에 반영
+        MemberInfo userDetails = (MemberInfo) memberInfoService.loadUserByUsername(member.getUserId());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+        session.setAttribute("loggedMember", userDetails.getMember());
+    }
+
+    // 개인 회원 탈퇴 처리
+    public void resign() {
+        Member member = memberUtil.getMember();
+        member.setDeletedAt(LocalDateTime.now());
+        repository.saveAndFlush(member);
+
+        // 로그아웃 처리 or 세션 무효화
+        session.invalidate();
     }
 }

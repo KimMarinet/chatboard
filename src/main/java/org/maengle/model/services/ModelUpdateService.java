@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.file.services.FileInfoService;
+import org.maengle.file.services.FileUploadService;
 import org.maengle.global.exceptions.script.AlertException;
 import org.maengle.global.libs.Utils;
 import org.maengle.model.constants.ModelStatus;
@@ -23,6 +24,7 @@ public class ModelUpdateService {
     private final HttpServletRequest request;
     private final Utils utils;
     private final FileInfoService fileInfoService;
+    private final FileUploadService fileUploadService;
 
     // 모델 등록,수정 화면에서 입력한 값을 requestModel에 담아서 넘겨줌
     public Model process(RequestModel form) {
@@ -47,6 +49,8 @@ public class ModelUpdateService {
         item.setMainImages(fileInfoService.getList(form.getGid(), "main"));
 
         modelRepository.saveAndFlush(item); // DB에 저장
+
+        fileUploadService.processDone(item.getGid());
 
         //modelInfoService.processDone(form.getGid());
         /*

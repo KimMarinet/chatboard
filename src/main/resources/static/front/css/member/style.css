@@ -1,5 +1,4 @@
 /* ---------- 회원 가입 페이지 ---------- S */
-
 .join-title {
   margin-bottom: 25px;
   font-size: 32px;
@@ -85,6 +84,38 @@ input#terms-agree {
     width: auto;
 }
 
+.auth_box1{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+#auth_count{
+    margin: 0 5px;
+}
+
+.email_auth_box{
+
+}
+
+.email_verify{
+    all: unset; /* 기본 버튼 스타일 제거 */
+    cursor: pointer;
+    font-size: 14px;
+    color: #007BFF;
+    margin-bottom: 15px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
+.email_verify:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+}
+
 /* ---------- 회원 가입 페이지 E ---------- */
 
 
@@ -106,7 +137,7 @@ input#terms-agree {
 }
 
 .login-template{
-    margin: 25px 0px;
+    margin: 15px 0px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,0 +1,108 @@
+/* ---------- 프론트 스타일 초기화 S ----------  */
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Segoe UI", sans-serif;;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+    color: #000;
+    background: #fff;
+    align-items: center;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+}
+
+
+/* ---------- 프론트 스타일 초기화 E ----------  */
+
+/* ---------- 챗봇 대화 영역 S ----------  */
+
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 500px;
+  overflow-y: auto;
+  background-color: #e5ddd5; /* 배경색 */
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  margin: 4px 0;
+}
+
+/* 메세지 위치 */
+.message.user {
+  align-self: flex-end;
+}
+
+.message.system {
+  align-self: flex-start;
+}
+/* 메세지 위치 */
+
+/* 메세지 형태 */
+.message-text {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+/* 메세지 형태 */
+
+
+.message.user .message-text {
+  background-color: #dcf8c6; /* 연두색 (사용자 메시지) */
+  border-bottom-right-radius: 2px;
+}
+
+.message.system .message-text {
+  background-color: #b9e0fd; /* 하늘색 (ai 메시지) */
+  border-bottom-left-radius: 2px;
+}
+
+.message.system .chatbot-emotion {
+  font-size: 3em;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* 사용자는 emotion 없어서 없으면 안보이게 처리 */
+.message.user .chatbot-emotion {
+    display: none;
+}
+
+/* ---------- 챗봇 대화 영역 E ----------  */
