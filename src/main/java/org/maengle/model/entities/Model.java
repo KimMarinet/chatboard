@@ -36,6 +36,9 @@ public class Model extends BaseEntity {
     @Column(length=60)
     private String category;
 
+    @Column(length = 60)
+    private String categories;
+
     @Column(length=60)
     private String subCategory;
 
@@ -46,5 +49,5 @@ public class Model extends BaseEntity {
 
     @Transient
     private FileInfo mainImage;
-
+    private String content;
 }

@@ -1,4 +1,5 @@
 spring:
   thymeleaf:
-    cache: true
     prefix: classpath:/templates/
+    suffix: .html
+    cache: false  # 개발 중에는 false로 설정하는 게 좋아요

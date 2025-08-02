@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${model.name}">모델 상세</title>
+    <link rel="stylesheet" th:href="@{/front/css/model/style.css}">
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="detail-container">
+        <h1 th:text="${model.name}">모델 이름</h1>
+        <img th:if="${model.mainImage != null}" th:src="${model.mainImage.fileUrl}" alt="모델 이미지" style="width:300px; height:auto;" />
+        <img th:if="${model.mainImage == null}" th:src="@{/images/no-image.png}" alt="기본 이미지" style="width:300px; height:auto;" />
+
+        <p><strong>카테고리:</strong> <span th:text="${model.category}">카테고리</span></p>
+        <p><strong>설명:</strong> <span th:text="${model.description}">설명</span></p>
+    </div>
+</section>
+</body>
+</html>

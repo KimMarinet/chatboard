@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="ListSearch" method="get" th:action="@{/model/category}" th:object="${search}">
+    <table>
+        <tr>
+            <th>검색어</th>
+            <td>
+                <div>
+                    <select th:field="*{searchType}">
+                        <option value="ALL">전체</option>
+                        <option value="GENRE">장르별</option>
+                        <option value="COUNT">조회수별</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">검색</button>
+</form>
+    <h1>모델 목록</h1>
+    <div>
+        <div th:each="item : ${items}" class="model-card">
+            <!-- 이미지 클릭 시 상세 페이지 이동 -->
+            <a th:href="@{/model/detail/{id}(id=${item.id})}">
+                <img th:src="${item.imageUrl}" alt="모델 이미지" />
+            </a>
+            <!-- 모델 이름 클릭 시 상세 페이지 이동 -->
+            <div>
+                <a th:href="@{/model/detail/{id}(id=${item.id})}" th:text="${item.name}">모델 이름</a>
+            </div>
+        </div>
+        <div th:text="${item.category.name}">카테고리명</div>
+    </div>
+
+</body>
+</html>

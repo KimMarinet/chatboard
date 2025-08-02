@@ -132,6 +132,9 @@ public class ModelViewService {
 
 		return new ListData<>(items, pagination);
 	}
+	public Model findById(Long id){
+		return modelRepository.findById(id).orElse(null);
+	}
 
 	// 모델 추가 정보 처리
 	private void addInfo(Model item) {
