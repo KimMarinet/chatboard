@@ -4,18 +4,45 @@
       layout:decorate="~{front/layouts/index}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${model.name}">모델 상세</title>
+    <title th:text="*{name}">모델 상세</title>
     <link rel="stylesheet" th:href="@{/front/css/model/style.css}">
 </head>
 <body>
-<section layout:fragment="content">
+<section layout:fragment="content" th:object="${model}">
     <div class="detail-container">
-        <h1 th:text="${model.name}">모델 이름</h1>
-        <img th:if="${model.mainImage != null}" th:src="${model.mainImage.fileUrl}" alt="모델 이미지" style="width:300px; height:auto;" />
-        <img th:if="${model.mainImage == null}" th:src="@{/images/no-image.png}" alt="기본 이미지" style="width:300px; height:auto;" />
+        <h1 th:text="*{name}">모델 이름</h1>
 
-        <p><strong>카테고리:</strong> <span th:text="${model.category}">카테고리</span></p>
-        <p><strong>설명:</strong> <span th:text="${model.description}">설명</span></p>
+        <img th:if="*{mainImage != null}" th:src="@{*{mainImage.fileUrl}}" alt="모델 이미지" style="width:300px; height:auto;" />
+        <img th:if="*{mainImage == null}" th:src="@{/images/no-image.png}" alt="기본 이미지" style="width:300px; height:auto;" />
+
+        <p><strong>카테고리:</strong> <span th:text="*{category}">카테고리</span></p>
+
+        <table>
+            <tr>
+                <th>대분류</th>
+                <td>
+                    <div class="error" th:each="err : ${#fields.errors('category')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>하위분류</th>
+                <td>
+                    <input type="hidden" name="subCategory" th:field="*{subCategory}">
+                </td>
+            </tr>
+            <tr>
+                <th>모델상태</th>
+                <p>
+                    <span th:switch="*{modelStatus}">
+                        <span th:case="READY">준비 중</span>
+                        <span th:case="ACTIVE">사용 중</span>
+                        <span th:case="*">알 수 없음</span>
+                    </span>
+                </p>
+            </tr>
+        </table>
+
+        <p><strong>설명:</strong> <span th:text="*{description}">설명</span></p>
     </div>
 </section>
 </body>
