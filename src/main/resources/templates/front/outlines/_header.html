@@ -36,28 +36,9 @@
     </div>
     <nav>
         <div class="layout-width">
-            <div class="dropdown">
-                    <a th:href="@{model/list/genre}" th:text="장르벌"></a>
-                    <div class="dropdown-content">
-                        <a th:href="@{model/genre/lr}" th:text="르와르"></a>
-                        <a th:href="@{model/genre/romance}" th:text="로맨스"></a>
-                        <a th:href="@{model/genre/wedding}" th:text="너의 경혼식"></a>
-                    </div>
-            </div>
-            <div class="dropdown">
-                <a th:href="@{model/list/emotion}" th:text="감정별"></a>
-                <div class="dropdown-content">
-                  <a th:href="@{model/emotion/delight}" th:text="기쁨"></a>
-                    <a th:href="@{model/emotion/sorrow}" th:text="슾픔"></a>
-                    <a th:href="@{model/emotion/surprise}" th:text="놀람 "></a>
-                </div>
-                <div class="dropdown">
-                    <a th:href="@{model/list/bast}" th:text="베스트 모델">
-                    <div class="dropdown-content">
-                        <a th:href="@{model/bast/}"></a>
-                    </div>
-                </div>
-            </div>
+            <a href="#" th:text="#{메뉴1}"></a>
+            <a href="#" th:text="#{메뉴2}" class="on"></a>
+            <a href="#" th:text="#{메뉴3}"></a>
             <a href="#" th:text="#{메뉴4}"></a>
             <a href="#" th:text="#{메뉴5}"></a>
         </div>

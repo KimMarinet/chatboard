@@ -60,6 +60,78 @@ button:hover {
 .text-right {
     text-alian: right;
 
-
 }
+/* 전체 레이아웃 */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* 헤더 스타일 */
+.book-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.book-header p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+/* 책 정보 섹션 */
+.book-info {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    align-items: flex-start;
+}
+
+.book-info .cover img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.book-info .meta {
+    flex: 1;
+    font-size: 1rem;
+}
+
+/* 설명 및 작가 정보 */
+.book-description,
+.author-info {
+    margin-top: 2rem;
+}
+
+.book-description h3,
+.author-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+}
+
+.book-description p,
+.author-info p {
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* 반응형 처리 */
+@media (max-width: 600px) {
+    .book-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-info .cover img {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
 
