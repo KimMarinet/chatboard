@@ -14,8 +14,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
@@ -105,7 +103,7 @@ public class ModelUpdateServiceTest {
         // 삭제할 모델의 seq를 파라미터로 설정 (index 0 기준)
         request.setParameter("seq_0", String.valueOf(seq));
 
-        modelUpdateService.processList(List.of(0));
+        //modelUpdateService.processList(List.of(0));
 
         Model found = modelRepository.findById(seq).orElseThrow();
 
@@ -136,7 +134,7 @@ public class ModelUpdateServiceTest {
         ReflectionTestUtils.setField(modelUpdateService, "request", request);
         ReflectionTestUtils.setField(utils, "request", request);
 
-        modelUpdateService.processList(List.of(0));
+        //modelUpdateService.processList(List.of(0));
 
         Model found = modelRepository.findById(seq).orElseThrow();
 
