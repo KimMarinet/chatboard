@@ -167,9 +167,11 @@ public class ModelViewService {
 
 		return categories;
 	}
-	public Model getD(Long id){
-		return modelRepository.findById(id).orElse(null);
+	public Model getModelByCategory(String categoryId) {
+		// Repository에서 데이터 조회
+		return modelRepository.findByCategoryId(categoryId);
 	}
+
 
 	// 모델 추가 정보 처리
 	private void addInfo(Model item) {

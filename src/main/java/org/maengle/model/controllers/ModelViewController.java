@@ -42,15 +42,17 @@ public class ModelViewController {
 		model.addAttribute("pageTitle", utils.getMessage("모델_목록"));
 		model.addAttribute("subCode", search.getSubCategory());
 
+
 		return "front/model/list";
 	}
 
 	// 상세 페이지
 	@GetMapping("/category/{id}")
-	public String category(@PathVariable Long id, Model model){
-		org.maengle.model.entities.Model d = modelInfoService.getD(id);
-
-		model.addAttribute("model",d );
+	public String category(@PathVariable String id, Model model) {
+		Model entity = modelInfoService.getModelByCategory(id);
+		model.addAttribute("model", entity);
 		return "front/model/category";
 	}
+
+
 }
