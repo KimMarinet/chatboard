@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layouts/index}">
+
+<html <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{admin/layouts/index}">
 
 <head>
     <title th:text="${pageTitle}">모델 목록</title>
@@ -20,7 +19,7 @@
                             <option value="ALL">통합검색</option>
                             <option value="NAME">이름</option>
                             <option value="COUNT">조회수</option>
-                        </select><x></x>
+                        </select>
                         <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드를 입력">
                     </div>
                 </td>
@@ -30,7 +29,6 @@
     </form>
 
     <h2>모델 목록</h2>
-    <form name="modeList" method="POST" th:action="@{/admin/model}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
         <table class="table-rows">
             <thead>
@@ -45,11 +43,14 @@
                 <th width="400">설명</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                <td align="center">
-                    <img th:if="${item.mainImages != null && !item.mainImages.isEmpty()}"
-                         th:src="@{${item.mainImages[0].fileUrl}}"
+
+            <tbody th:if="${items != null && !items.isEmpty()}">
+            <tr th:each="item, status : ${items}" th:object="${item}">
+
+
+            <td align="center">
+                    <img th:if="${item.mainImages != null and !item.mainImages.isEmpty()}"
+                         th:src="${item.mainImages[0].fileUrl}"
                          alt="이미지" width="80">
                     <span th:if="${item.mainImages == null || item.mainImages.isEmpty()}">이미지 없음</span>
                 </td>
@@ -75,7 +76,7 @@
             </tbody>
 
         </table>
-    </form>
+
 
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
