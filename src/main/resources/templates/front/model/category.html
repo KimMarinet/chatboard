@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>장르별 모델 목록</title>
+</head>
+<body>
+<div class="content">
+    <h2>장르별 모델 목록</h2>
+    <ul class="genre-list">
+        <li>
+            <a th:href="@{/model(category='모델', subCategory='액션')}">액션</a>
+        </li>
+        <li>
+            <a th:href="@{/model(category='모델', subCategory='로맨스')}">로맨스</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
