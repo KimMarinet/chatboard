@@ -167,10 +167,6 @@ public class ModelViewService {
 
 		return categories;
 	}
-	public Model getModelByCategory(String categoryId) {
-		// Repository에서 데이터 조회
-		return modelRepository.findByCategoryId(categoryId);
-	}
 
 
 	// 모델 추가 정보 처리
