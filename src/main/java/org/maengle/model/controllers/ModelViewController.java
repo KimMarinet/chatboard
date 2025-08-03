@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -42,5 +43,14 @@ public class ModelViewController {
 		model.addAttribute("subCode", search.getSubCategory());
 
 		return "front/model/list";
+	}
+
+	// 상세 페이지
+	@GetMapping("/category/{id}")
+	public String category(@PathVariable Long id, Model model){
+		org.maengle.model.entities.Model d = modelInfoService.getD(id);
+
+		model.addAttribute("model",d );
+		return "front/model/category";
 	}
 }

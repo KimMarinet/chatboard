@@ -4,7 +4,9 @@
       layout:decorate="~{front/layouts/index}">
 
 <main layout:fragment="content" class="layout-width ai-model-page">
-    <h1 th:text="${pageTitle}"></h1>
+    <h1 th:text="${pageTitle}"></h1>'
+    <link rel="stylesheet" th:href="@{/model/css/style.css}">
+
 
 
     <form class="frm-search" name="frmSearch" method="GET" th:action="@{/model}" th:object="${modelSearch}" autocomplete="off">
