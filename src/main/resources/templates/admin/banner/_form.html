@@ -4,7 +4,7 @@
     <input th:if="*{mode == 'edit' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="180">배너그룹</th>
             <td>
                 <select name="groupCode" th:field="*{groupCode}">

@@ -4,7 +4,7 @@
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <h2>기본설정</h2>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="150">게시판 아이디</th>
             <td th:if="*{mode == 'update'}">
                 <input type="hidden" name="bid" th:field="*{bid}">
@@ -110,7 +110,7 @@
     <h2>분류설정</h2>
 
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="150">분류</th>
             <td>
                 <textarea name="category" th:text="*{category}" placeholder="분류 여러개는 엔터키로 줄개행 해서 입력"></textarea>
@@ -121,7 +121,7 @@
     <h2>스킨설정</h2>
 
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="150">스킨 선택</th>
             <td>
                 <input type="radio" name="skin" value="default" id="skin-default" th:field="*{skin}">
@@ -135,7 +135,7 @@
 
     <h2>권한설정</h2>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="150">목록 권한</th>
             <td>
                 <input type="radio" name="listAuthority" value="MEMBER" th:field="*{listAuthority}" id="listAuthority-MEMBER">

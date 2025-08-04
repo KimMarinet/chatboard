@@ -8,7 +8,7 @@
 
     <form name="frmSearch" method="GET" class="form-margin" th:action="@{/admin/model}" autocomplete="off" th:object="${search}">
         <table class="table-cols">
-            <tr>
+            <tr class="add-top-line">
                 <th width="150">키워드 검색</th>
                 <td>
                     <div class="flex">
@@ -25,7 +25,7 @@
         <button type="submit" class="submit-btn">검색하기</button>
     </form>
 
-    <h2>모델 목록</h2>
+    <h2 th:text="${pageTitle}"></h2>
         <form name="frmList" th:method="POST" th:action="@{/admin/model}" target="ifrmProcess" autocomplete="off">
             <input type="hidden" name="_method" value="PATCH">
             <table class="table-rows">
@@ -44,7 +44,7 @@
                 </thead>
                 <tbody>
                 <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                    <td class="image-cell">
+                    <td class="image-cell" align="center">
                         <img th:if="${item.mainImage != null}"
                              th:src="@{${item.mainImage.fileUrl}}"
                              alt="이미지" width="80">
@@ -52,7 +52,7 @@
                     </td>
 
                     <!-- 체크박스 -->
-                    <td>
+                    <td align="center">
                         <input type="checkbox" name="idx" th:value="${status.index}" th:id="${'chk-' + status.index}">
                         <label th:for="${'chk-' + status.index}" class="standalone"></label>
                         <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}" />
@@ -60,20 +60,20 @@
                     </td>
 
                     <!-- 카테고리 -->
-                    <td>
+                    <td align="center">
                         <div th:text="*{category}"></div>
                         <div th:if="*{subCategory != null}" th:text="*{'(' + subCategory + ')'}"></div>
                     </td>
 
                     <!-- 모델 이름 -->
-                    <td>
+                    <td align="center">
                         <div class="model-cell">
                             <div class="model-name" th:text="*{name}"></div>
                         </div>
                     </td>
 
                     <!-- 모델 설명 -->
-                    <td th:utext="*{description}"></td>
+                    <td th:utext="*{description}" align="center"></td>
 
                     <td>
                         <div>

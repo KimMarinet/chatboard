@@ -7,17 +7,19 @@
         <h2>회원 검색</h2>
         <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}" class="form-margin">
             <table class="table-cols">
-                <th width="120">회원권한</th>
-                <td>
-                    <span th:each="auth : ${authorities}" class="checkbox">
-                        <input type="checkbox" name="authorities"
-                               th:value="${auth.name()}"
-                               th:id="${'authority-' + auth.name()}"
-                               th:field="*{authorities}">
-                        <label th:for="${'authority-' + auth.name()}" th:text="${#messages.msg('authority.' + auth.name())}"></label>
-                    </span>
-                </td>
-                <tr>
+                <tr class="add-top-line">
+                    <th width="120">회원권한</th>
+                    <td>
+                        <span th:each="auth : ${authorities}" class="checkbox">
+                            <input type="checkbox" name="authorities"
+                                   th:value="${auth.name()}"
+                                   th:id="${'authority-' + auth.name()}"
+                                   th:field="*{authorities}">
+                            <label th:for="${'authority-' + auth.name()}" th:text="${#messages.msg('authority.' + auth.name())}"></label>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="add-top-line">
                     <th>키워드 검색</th>
                     <td class="flex">
                         <select name="sopt" th:field="*{sopt}" class="search-option">
@@ -75,7 +77,7 @@
                     </td>
                     <td align="center">
                         <th:block th:if="*{deletedAt != null}">
-                            <div class="badge" th:text="*{#strings.concat('탈퇴(', #temporals.format(deletedAt, 'yy.MM.dd HH:mm'), ')')}"></div>
+                            <div th:text="*{#strings.concat('탈퇴(', #temporals.format(deletedAt, 'yy.MM.dd HH:mm'), ')')}"></div>
                             <span class="checkbox">
                         <input type="checkbox" th:name="${'cancelResign_' + status.index}" value="true" th:id="${'cancelResign_' + status.index}">
                         <label th:for="${'cancelResign_' + status.index}">탈퇴 취소하기</label>
