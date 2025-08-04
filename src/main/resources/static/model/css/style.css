@@ -1,0 +1,57 @@
+.items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.photo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.content {
+  flex: 1;
+}
+
+.model-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.description {
+  font-size: 0.95em;
+  color: #555;
+}
+
+/* 랭킹 강조 */
+.rank-1 {
+  border: 2px solid #ff5252;
+  background-color: #fff0f0;
+}
+.rank-2 {
+  border: 2px solid #ff9800;
+  background-color: #fff8e1;
+}
+.rank-3 {
+  border: 2px solid #2196f3;
+  background-color: #e3f2fd;
+}

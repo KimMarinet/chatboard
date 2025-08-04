@@ -41,6 +41,13 @@ public class ModelViewController {
 		model.addAttribute("pageTitle", utils.getMessage("모델_목록"));
 		model.addAttribute("subCode", search.getSubCategory());
 
+
 		return "front/model/list";
 	}
+
+	// 상세 페이지
+
+
+
+
 }

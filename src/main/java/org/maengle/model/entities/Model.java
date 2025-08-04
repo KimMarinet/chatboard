@@ -1,6 +1,7 @@
 package org.maengle.model.entities;
 
 import jakarta.persistence.*;
+import jdk.jfr.Category;
 import lombok.Data;
 import org.maengle.chatbot.constants.ChatbotModel;
 import org.maengle.file.entities.FileInfo;
@@ -38,6 +39,10 @@ public class Model extends BaseEntity {
 
     @Column(length=60)
     private String subCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category categorys; // 분류 하기 기 위래서 사용
+
 
     private long count; // 조회수
 
