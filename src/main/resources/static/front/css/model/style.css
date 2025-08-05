@@ -1,0 +1,71 @@
+/* 모델 검색 */
+.ai-model-page .frm-search {
+    display: flex;
+    width: 700px;
+    margin: 20px auto 40px;
+    height: 60px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.ai-model-page .frm-search select {
+    border: 0;
+    width: 150px;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.ai-model-page .frm-search input[type='text'] {
+    flex-grow: 1;
+    border: 0;
+    padding: 0 15px;
+    font-size: 1.15rem;
+    color: #007bff;
+    border-left: 2px solid #007bff;
+}
+
+.ai-model-page .frm-search button {
+    width: 150px;
+    border: 0;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}/* 모델 목록 s*/
+.ai-model-page .items > li {
+    display: flex;
+    box-shadow: 2px 2px 5px #212121;
+    border-radius: 10px;
+    padding: 25px;
+    background: #fff; /* 배경 흰색 추가 */
+}
+
+.ai-model-page .items > li + li {
+    margin-top: 20px;
+}
+
+.ai-model-page .items .photo {
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.ai-model-page .items .name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.ai-model-page .items .description {
+    height: 110px;
+    overflow-y: auto;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 3px;
+    flex-grow: 1;
+}
+
+
+
+ /* 모델 목록 e*/

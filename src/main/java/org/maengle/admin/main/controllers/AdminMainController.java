@@ -11,6 +11,6 @@ public class AdminMainController {
 
     @GetMapping
     public String adminMainPage() {
-        return "admin/main/main";
+        return "redirect:/admin/member";
     }
 }

@@ -26,15 +26,13 @@
             </div>
             </a>
         </li>
-        <li th:classappend="${menuCode != null && menuCode == 'board'} ? 'on'">
-            <a href="/board/all" class="board-link">
-            <div class="menu">
+        <li>
+            <div href="/board/all" class="board-link menu">
                 <div class="icon"></div>
                 <div class="text" th:text="#{게시판}"></div>
             </div>
-            </a>
             <div class="sub-menus" th:if="${boardMenus != null && !boardMenus.isEmpty()}">
-                <a th:each="item : ${boardMenus}" th:object="${item}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{name}"></a>
+                <a th:each="item : ${boardMenus}" th:object="${item}" class="board-side" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{name}"></a>
             </div>
         </li>
         <li th:classappend="${menuCode != null && menuCode == 'model'} ? on">

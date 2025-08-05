@@ -93,6 +93,117 @@
 
 ---
 
+### 🟨 주용현
+
+### ➡️ 기능 설명
+- 로그인한 회원의 정보를 기반으로 개인화된 마이페이지 제공
+  - 주요 기능:
+    - 메인 페이지 - 로그인한 사용자의 정보와 최근 게시글 5개 표시
+    - 개인정보 수정 - 이름, 성별, 휴대폰 번호, 프로필 이미지 변경
+    - 비밀번호 변경 시에는 복잡성 검사 수행
+    - 작성한 게시글 조회 - 본인이 작성한 게시글 목록 조회 (페이지네이션 포함)
+    - 회원 탈퇴 - 탈퇴 확인 후 회원 삭제 처리
+    - 탈퇴 클릭 시 sweetAlert2를 띄어 경고 후 탈퇴 처리
+    - 각 메뉴 진입 시 타이틀, 스크립트, 스타일 등을 동적으로 세팅
+-  챗봇 서비스
+  - 사용자가 선택한 챗봇 모델(ChatbotModel)을 기반으로 채팅 세션을 관리
+  - 채팅방(roomId)을 생성하거나 기존 방으로 입장 가능
+  - 사용자의 메시지를 받고 AI 챗봇 API에 메시지를 전송하여 응답 수신
+  - 사용자 메시지 및 챗봇 메세지, 감정 정보를 DB에 저장
+  - 프론트엔드에 필요한 CSS, JS 리소스 동적 추가
+- 공통소스 : file
+  - [업로드] : FileUploadService → FileInfoService (경로 계산, URL 설정) → DB 저장
+  - [삭제] : FileDeleteService → FileInfoService (정보 조회) → File 시스템 + DB 삭제
+  - [조회] : FileInfoService 단독 → DB 조회 + 경로/URL 가공
+  - [JS 연동] : commonLib.fileManager → Ajax로 /file/upload, /file/delete → 위 서비스들 호출
+
+### ➡️ 코드 리뷰
+- MyPageController
+  - 마이페이지 전체 기능을 관리하는 컨트롤러
+  - 공통 전처리 메서드 commonProcess()페이지 모드에 따라 타이틀, JS, CSS 등을 세팅
+  - /mypage 기본 마이페이지로 회원 정보와 최근 게시글(최대 5개)을 조회
+  - boardInfoService에 getMyLatest 메서드를 정의하여 limit갯수(5개)만큼 회원이 작성한 최신게시글 가져오기
+  - /mypage/profile (GET, PATCH)
+  - 프로필 조회 및 수정
+  - ProfileValidator를 통해 입력값 유효성 검사
+  - 비밀번호는 있을 경우에만 복잡도 및 확인 검사 수행
+  - /mypage/board내가 작성한 글을 리스트로 출력 (검색조건 BoardSearch 사용)
+  - /mypage/resign회원탈퇴 확인 및 처리 (POST 요청 시 MemberUpdateService.resign() 호출)
+- RequestProfile (DTO)
+  - 프로필 수정 폼 객체
+  - 이름, 성별, 휴대폰 번호, 비밀번호, 프로필 이미지 포함
+- ProfileValidator
+  - 비밀번호 복잡성 검사 (checkAlpha, checkNumber, checkSpecialChars)
+  - 비밀번호 확인 필드 일치 여부 검사
+  - 휴대폰 번호 형식 유효성 검사 (checkMobile)
+  - 네이버/카카오 로그인은 비밀번호 입력이 없을 수 있음 → 조건부 검사 처리 적절함
+ 
+    
+- ChatbotModel (Enum)
+  - 챗봇 모델별 번호(num)와 이름(title)을 정의
+  - enum 타입으로 각 모델을 구분하여 코드 내 명확성 제공
+- ChatController
+  - `/chat` 기본 경로에서 챗봇 대화 페이지 노출
+  - `index` 메서드: model(enum)과 roomId(옵션)를 받아 세션 생성 및 화면에 전달
+  - `chatting` API: 클라이언트 요청으로 받은 메시지와 모델 정보로 서비스 호출 후 결과 반환
+  - 요청 파라미터 검증을 위해 `@Valid` 및 `Errors` 사용, 에러 발생 시 커스텀 예외 처리
+  - 응답은 JSON 형태로 `ChatData` 엔티티를 그대로 반환
+- RequestChat (DTO)
+  - 채팅 API 요청 데이터 바인딩용 객체
+  - roomId (optional), model(enum, not null), message(not blank) 필드 포함
+- ChatData (Entity)
+  - 채팅 데이터를 DB에 저장하기 위한 저장용 JPA 엔티티
+  - 챗봇 모델, 방 ID, 회원, 사용자 메시지, 챗봇 메시지, 감정 정보 컬럼 정의
+  - `@Enumerated(EnumType.STRING)`으로 enum 저장 시 가독성 유지
+  - 회원과 연관관계 설정 및 Jackson 직렬화 예외 처리(`@JsonIgnore`)
+- ChatDataRepository
+  - 기본 CRUD 및 Querydsl 동적 쿼리 지원
+- ChattingService
+  - 로그인 여부 확인 후 채팅 기록 저장
+  - 외부 AI 챗봇 API 호출 (RestTemplate 사용)
+  - API URL, 메시지, 모델 번호를 포함한 GET 요청 생성 및 전송
+  - 응답에서 시스템 메시지와 감정 정보를 추출해 DB에 업데이트
+  - 멤버 정보를 MemberUtil로 가져와 연동
+ 
+- FileInfoService
+  - 파일 정보를 조회하고 가공하는 역할을 담당하는 서비스
+  - 주요 기능 get(Long seq) → 파일의 고유 번호(seq)로 FileInfo 엔티티 조회 후 URL, 경로, 이미지 여부 등의 부가 정보를 설정
+  - getList(String gid, String location, FileStatus status) → 파일 그룹(gid) 및 위치(location)에 따라 필터링된 파일 목록을 조회합니다. FileStatus로 DONE, UNDONE 필터링 가능
+  - getFileUrl(FileInfo item) → 브라우저에서 접근 가능한 파일 URL 생성.
+  - getFilePath(FileInfo item) → 서버에서의 실제 저장 경로 생성.
+  - addInfo(FileInfo item) → 파일 객체에 파일 경로, URL, 이미지 여부, 썸네일 경로 등을 설정합니다.
+  - folder(long seq) → 파일 저장 폴더를 0~9 범위로 분산 저장하도록 지정 (seq % 10).
+- FileUploadService
+  - 파일을 서버에 업로드하고 DB에 기록하는 서비스
+  - 주요 기능 uploadProcess(RequestUpload uploadForm)
+  - 파라미터에서 gid, location, single, imageOnly 등의 설정값을 추출
+  - 유효성 검사 및 옵션에 따라 기존 파일 삭제(single이면 deleteService.process(...))
+  - MultipartFile을 지정 폴더에 저장
+  - DB에 FileInfo 저장 후 경로 추가
+  - processDone(String gid) → 특정 파일 그룹에 속한 파일들을 done = true 상태로 업데이트
+  - 특이사항 저장 경로는 basePath/폴더(seq%10)/파일명(seq+확장자) 형태로 지정됨.
+  - 실패 시 DB에서 FileInfo 레코드 삭제.
+- FileDeleteService
+  - 파일을 서버 디스크와 DB에서 모두 삭제하는 서비스
+  - 주요 기능 deleteProcess(Long seq)
+  - infoService.get(seq)으로 파일 정보 조회
+  - File 객체 생성 후 실제 경로에서 파일 삭제
+  - DB에서도 삭제 처리
+  - process(String gid, String location) → 해당 gid 및 location에 포함된 파일들을 반복적으로 deleteProcess() 호출하여 일괄 삭제 → location이 없으면 전체 gid로 삭제 가능
+- [Upload] : FileUploadService → FileInfoService (경로 계산, URL 설정) → DB 저장
+- [Delete] : FileDeleteService → FileInfoService (정보 조회) → File 시스템 + DB 삭제
+- [조회] : FileInfoService 단독 → DB 조회 + 경로/URL 가공
+- [JS 연동] : commonLib.fileManager → Ajax로 /file/upload, /file/delete → 위 서비스들 호출
+
+### ✅ 구현 이미지
+![구현화면1](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20board%20%EA%B5%AC%ED%98%84%ED%99%94%EB%A9%B4.png)
+![구현화면2](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20index%20%EA%B5%AC%ED%98%84%ED%99%94%EB%A9%B4.png)
+![구현화면3](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20resign%20%EA%B5%AC%ED%98%84%ED%99%94%EB%A9%B4.png)
+![구현화면4](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EC%84%B1%EB%B3%84%20%EB%95%8C%EB%AC%B8%EC%97%90%20%EB%8B%A4%EC%8B%9C%20%EC%88%98%EC%A0%95.png)
+![구현화면5](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EC%B1%84%ED%8C%85%EC%B0%BD%20%EA%B5%AC%ED%98%84%ED%99%94%EB%A9%B4.png)
+
+---
+
 ### 🟨 오경석
 
 ### ➡️ 기능 설명
