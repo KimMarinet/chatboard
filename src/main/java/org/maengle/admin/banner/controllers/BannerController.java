@@ -2,6 +2,7 @@ package org.maengle.admin.banner.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.maengle.admin.global.controllers.CommonController;
 import org.maengle.admin.global.menus.Menu;
 import org.maengle.admin.global.menus.Menus;
 import org.maengle.banner.entities.Banner;
@@ -23,7 +24,7 @@ import java.util.List;
 @Controller("adminBannerController")
 @RequestMapping("/admin/banner")
 @RequiredArgsConstructor
-public class BannerController {
+public class BannerController extends CommonController {
 
     private final BannerGroupSaveService bannerGroupSaveService;
     private final BannerGroupDeleteService bannerGroupDeleteService;
@@ -34,15 +35,12 @@ public class BannerController {
     private final BannerValidator bannerValidator;
     private final Utils utils;
 
-    @ModelAttribute("mainCode")
+    @Override
+    @ModelAttribute("meinCode")
     public String mainCode() {
         return "banner";
     }
 
-    @ModelAttribute("subMenus")
-    public List<Menu> subMenus() {
-        return Menus.getMenus("banner");
-    }
 
 
     @ModelAttribute("bannerGroups")

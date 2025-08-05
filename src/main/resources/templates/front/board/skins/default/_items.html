@@ -33,7 +33,7 @@
             <option value="NAME" th:text="#{이름}"></option>
         </select>
         <input type="text" name="skey" th:field="*{skey}">
-        <button type="submit" th:text="#{검색하기}"></button>
+        <button type="submit" class="btn-submit" th:text="#{검색하기}"></button>
     </form>
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </th:block>

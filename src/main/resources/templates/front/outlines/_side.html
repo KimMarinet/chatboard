@@ -8,6 +8,9 @@
             <a th:href="@{/mypage/profile}" th:text="#{프로필_이미지가_없습니다}" class="menu-profile"></a>
         </th:block>
     </th:block>
+    <th:block th:unless="${isLogin}">
+        <img th:src="@{/common/images/logo.png}" alt="기본 프로필 이미지">
+    </th:block>
 
     <ul class="menus">
         <li>

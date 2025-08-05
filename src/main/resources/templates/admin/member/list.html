@@ -94,8 +94,9 @@
             </table>
             <div class="table-action">
                 <button type="button" class="sbtn process-form delete" data-form-name="frmList">선택회원 탈퇴시키기</button>
-                <button type="button" class="sbtn black process-form edit" data-form-name="frmList">선택회원 수정하기</button>
+                <button type="button" class="sbtn process-form delete" data-form-name="frmList">선택회원 수정하기</button>
             </div>
         </form>
+        <th:block th:replace="~{common/_pagination::pagination}"></th:block>
     </section>
 </html>

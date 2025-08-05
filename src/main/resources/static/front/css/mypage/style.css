@@ -184,14 +184,6 @@ main > section {
   margin: 30px 0;
 }
 
-.mypage-container {
-  background: #fff;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  width: 100%;
-}
-
 .mypage-container .mypage-form {
   max-width: 50%;
   margin: 0 0 0 100px;
@@ -344,13 +336,6 @@ aside.my-menu .profile-image:hover img {
 
 
 /* ------- 마이페이지 내 게시글(board) 스타일 ------- */
-.myboard-container {
-  background: #fff;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  width: 100%;
-}
 
 .myboard-container .frm-search {
   width: 100%;

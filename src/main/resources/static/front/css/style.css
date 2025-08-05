@@ -486,3 +486,7 @@ main-menu .sub-menus li.on .sub-menu-items {
     box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
     transform: scale(1.02);
 }
+
+.mypage-gender {
+    font-size: 20px;
+}

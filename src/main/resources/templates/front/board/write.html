@@ -3,14 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
+<th:block layout:fragment="addCss">
+    <link rel="stylesheet" th:href="@{/front/css/board/style.css}" />
+</th:block>
+
 <main layout:fragment="content">
     <th:block th:replace="~{front/board/_board_title::common}"></th:block>
     <form name="frmSave" method="POST" th:action="@{/board/save}" autocomplete="off">
         <input type="hidden" name="mode" value="write">
         <th:block th:replace="~{front/board/_form::common}"></th:block>
         <div class="button-group">
-            <button type="reset" th:text="#{다시입력}" class="btn"></button>
-            <button type="submit" th:text="#{작성하기}" class="btn"></button>
+            <button type="reset" th:text="#{다시입력}" class="b-btn"></button>
+            <button type="submit" th:text="#{작성하기}" class="b-btn"></button>
         </div>
     </form>
 </main>

@@ -160,11 +160,22 @@ label {
 }
 
 .frm-search button {
-    flex-shrink: 0;
+     width: 15%;
+      padding: 12px;
+      background-color: #c2e1e4;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
 }
 
 .frm-search button:hover {
-    background-color: #91c8e5;
+    background-color: #1E9EFF;
+    color: white;
 }
 
 .category-tabs {
@@ -358,6 +369,55 @@ label {
 
 .comment-form button:hover {
     background-color: #156fcd;
+}
+
+.b-btn {
+    background-color: #f0f8ff;
+    border: 1px solid #66b2ff;
+    color: #0077cc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.b-btn:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.btn-group .btn {
+  margin-left: 8px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 5px;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2FA1FC;
+  cursor: pointer;
+}
+
+.checkbox label {
+  cursor: pointer;
+  user-select: none;
 }
 
 /* all.html 영역  S */
