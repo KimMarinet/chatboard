@@ -62,7 +62,10 @@ public class BoardAuthService {
         }
 
         if (mode.equals("write") || mode.equals("list") || mode.equals("view")) { // 글작성, 글보기, 글 목록 권한 체크
-            Authority authority = mode.equals("write") ? board.getWriteAuthority() : mode.equals("view") ? board.getViewAuthority() : board.getListAuthority();
+            Authority authority = mode.equals("write") ? board.getWriteAuthority()
+                    : mode.equals("view") ? board.getViewAuthority()
+                    : board.getListAuthority();
+
             boolean loginRequired = false;
             if (authority == Authority.MEMBER && !memberUtil.isLogin()) {
                 loginRequired = true;
@@ -88,17 +91,23 @@ public class BoardAuthService {
                 } catch (IOException e) {}
             }
             // 글작성, 글보기, 글 목록 권한 체크 E
-
-            /**
-             * 글 수정, 글 삭제 권한 체크 S
-             * - 회원번호가 로그인한 사용자의 회원번호가 일치하는지
-             */
-            Member boardMember = item.getMember();
-            if (!memberUtil.isLogin() || !boardMember.getUserUuid().equals(memberUtil.getMember().getUserUuid())) { // 직접 작성한 게시글이 아닌 경우
-                 throw new UnAuthorizedException("UnAuthorized");
-            }
-            // 글 수정, 글 삭제 권한 체크 E
         }
+
+        /**
+         * 글 수정, 글 삭제 권한 체크 S
+         * - 회원번호가 로그인한 사용자의 회원번호가 일치하는지
+         */
+        if (mode.equals("edit") || mode.equals("delete")) {
+            if (item == null) return;
+
+            Member boardMember = item.getMember();
+
+            if (!memberUtil.isLogin() || !boardMember.getUserUuid().equals(memberUtil.getMember().getUserUuid())) { // 직접 작성한 게시글이 아닌 경우
+                throw new UnAuthorizedException("UnAuthorized");
+            }
+        }
+        // 글 수정, 글 삭제 권한 체크 E
+
         // 댓글 수정, 댓글 삭제 권한 체크 S
         if (comment != null && mode.startsWith("comment_")) {
             Member commentMember = comment.getMember();
@@ -108,6 +117,7 @@ public class BoardAuthService {
         }
         // 댓글 수정, 댓글 삭제 권한 체크 E
     }
+
 
 
 
