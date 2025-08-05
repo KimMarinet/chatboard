@@ -411,6 +411,10 @@ main-menu .sub-menus li.on .sub-menu-items {
    font-weight: 500;
  }
 
+ .board-side {
+    display: block;
+ }
+
 
 /* ---------- 사이드 메뉴 영역 E ---------- */
 
