@@ -414,3 +414,13 @@ textarea:focus {
     min-width: 1024px;
     margin: 0 auto;
 }
+
+.swal2-confirm-red {
+    background-color: #e74c3c !important; /* 빨간색 */
+    color: white !important;
+}
+
+.swal2-cancel-gray {
+    background-color: #95a5a6 !important; /* 회색 */
+    color: white !important;
+}

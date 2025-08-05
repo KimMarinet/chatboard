@@ -12,13 +12,34 @@ window.addEventListener("DOMContentLoaded", function() {
     const { fileManager, insertEditorImage } = commonLib;
     const removeEls = document.querySelectorAll(".file-items .remove");
     removeEls.forEach(el => {
-        el.addEventListener("click", function() {
-            if (!confirm('정말 삭제하겠습니까?')) {
-                return;
-            }
-
+        el.addEventListener("click", function () {
             const { seq } = this.dataset;
-            fileManager.delete(seq);
+
+            Swal.fire({
+                title: '정말 삭제하시겠습니까?',
+                text: '삭제된 파일은 복구할 수 없습니다.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'swal2-confirm-red',
+                    cancelButton: 'swal2-cancel-gray'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fileManager.delete(seq);
+
+                    Swal.fire({
+                        title: '삭제 완료',
+                        text: '파일이 삭제되었습니다.',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            });
         });
     });
 
@@ -78,10 +99,35 @@ function fileUploadCallback(items) {
         const removeEl = fileItem.querySelector(".remove");
         if (removeEl) {
             const { fileManager } = commonLib;
-            removeEl.addEventListener("click", function() {
-                if (confirm('정말 삭제하겠습니까?')) {
-                    fileManager.delete(seq);
-                }
+
+            removeEl.addEventListener("click", function () {
+                const { seq } = this.dataset;
+
+                Swal.fire({
+                    title: '정말 삭제하시겠습니까?',
+                    text: '삭제된 파일은 복구할 수 없습니다.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'swal2-confirm-red',
+                        cancelButton: 'swal2-cancel-gray'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fileManager.delete(seq);
+
+                        Swal.fire({
+                            title: '삭제 완료',
+                            text: '파일이 삭제되었습니다.',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    }
+                });
             });
         }
 
