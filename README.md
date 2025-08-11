@@ -1,4 +1,5 @@
 # [맹글맹글 프로젝트](https://maengle.xyz)
+- 주소 : https://maengle.xyz
 - 관리자 아이디 : admin01
 - 관리자 비밀번호 : _aA123456
 
