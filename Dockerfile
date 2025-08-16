@@ -14,10 +14,10 @@ ENV NAVER_APIKEY=**
 ENV NAVER_SECRET=**
 ENV MAIL_USERNAME=**
 ENV MAIL_PASSWORD=**
+ENV CHATBOT_URL=**
 
 ENV REDIS_HOST=172.31.39.187
 ENV REDIS_PORT=6379
-ENV CHATBOT_URL=http://localhost:8000
 
 ENTRYPOINT ["java", "-Ddb.password=${DB_PASSWORD}","-Ddb.url=${DB_URL}", "-Ddb.username=${DB_USERNAME}", "-Dfile.path=/uploads", "-Dfile.url=/uploads", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dddl.auto=${DDL}", "-Dchatbot.url=${CHATBOT_URL}", "-Dkakao.apikey=${KAKAO_APIKEY}", "-Dnaver.apikey=${NAVER_APIKEY}", "-Dnaver.secret=${NAVER_SECRET}", "-Dmail.username=${MAIL_USERNAME}", "-Dmail.password=${MAIL_PASSWORD}", "-Dredis.host=${REDIS_HOST}", "-Dredis.port=${REDIS_PORT}" ,"-jar", "app.jar"]
 
