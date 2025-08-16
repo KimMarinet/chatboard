@@ -16,7 +16,6 @@ public class JoinServiceTest {
 
     @Test
     void test1(){
-
         RequestJoin form = new RequestJoin();
 
         form.setUserId("userID01");
